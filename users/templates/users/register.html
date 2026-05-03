@@ -1,0 +1,284 @@
+{% extends "users/base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<style>
+    .auth-page {
+        max-width: 620px;
+        margin: 40px auto 60px;
+        padding: 0 16px;
+    }
+
+    .auth-card {
+        background: #ffffff;
+        border-radius: 28px;
+        padding: 36px 32px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .auth-title {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1.1;
+        color: #0f172a;
+        margin-bottom: 10px;
+    }
+
+    .auth-subtitle {
+        font-size: 21px;
+        line-height: 1.55;
+        color: #64748b;
+        margin-bottom: 28px;
+    }
+
+    .auth-error-box {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #991b1b;
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .auth-error-box ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+    }
+
+    .auth-field {
+        margin-bottom: 22px;
+    }
+
+    .auth-label {
+        display: block;
+        font-size: 16px;
+        font-weight: 700;
+        color: #334155;
+        margin-bottom: 10px;
+    }
+
+    .auth-input {
+        width: 100%;
+        height: 54px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 16px;
+        padding: 0 16px;
+        font-size: 17px;
+        color: #0f172a;
+        background: #f8fafc;
+        transition: all 0.2s ease;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .auth-input:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .field-error {
+        margin-top: 8px;
+        color: #b91c1c;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .auth-help-text {
+        margin-top: 8px;
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+
+    .auth-button {
+        width: 100%;
+        height: 56px;
+        border: none;
+        border-radius: 16px;
+        background: #1d6ff2;
+        color: #ffffff;
+        font-size: 19px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.15s ease;
+        margin-top: 6px;
+    }
+
+    .auth-button:hover {
+        background: #155df0;
+    }
+
+    .auth-button:active {
+        transform: translateY(1px);
+    }
+
+    .auth-footer {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 17px;
+        color: #64748b;
+    }
+
+    .auth-footer a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .auth-page {
+            margin: 24px auto 40px;
+            padding: 0 12px;
+        }
+
+        .auth-card {
+            padding: 26px 20px;
+            border-radius: 22px;
+        }
+
+        .auth-title {
+            font-size: 34px;
+        }
+
+        .auth-subtitle {
+            font-size: 18px;
+            margin-bottom: 22px;
+        }
+
+        .auth-input {
+            height: 50px;
+            font-size: 16px;
+        }
+
+        .auth-button {
+            height: 52px;
+            font-size: 18px;
+        }
+
+        .auth-footer {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="auth-page">
+    <div class="auth-card">
+        <h1 class="auth-title">Регистрация</h1>
+        <p class="auth-subtitle">
+            Создайте аккаунт, чтобы вести рацион, контролировать воду и отслеживать прогресс.
+        </p>
+
+        {% if form.non_field_errors %}
+            <div class="auth-error-box">
+                Проверьте введённые данные.
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="auth-field">
+                <label for="id_username" class="auth-label">Логин</label>
+                <input
+                    type="text"
+                    name="username"
+                    id="id_username"
+                    class="auth-input"
+                    placeholder="Придумайте логин"
+                    value="{{ form.username.value|default:'' }}"
+                    required
+                >
+
+                {% if form.username.errors %}
+                    <div class="field-error">
+                        {{ form.username.errors|striptags }}
+                    </div>
+                {% endif %}
+
+                <div class="auth-help-text">
+                    Используйте буквы, цифры и символы @/./+/-/_.
+                </div>
+            </div>
+
+            {% if form.email %}
+                <div class="auth-field">
+                    <label for="id_email" class="auth-label">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="id_email"
+                        class="auth-input"
+                        placeholder="Введите email"
+                        value="{{ form.email.value|default:'' }}"
+                    >
+
+                    {% if form.email.errors %}
+                        <div class="field-error">
+                            {{ form.email.errors|striptags }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="auth-field">
+                <label for="id_password1" class="auth-label">Пароль</label>
+                <input
+                    type="password"
+                    name="password1"
+                    id="id_password1"
+                    class="auth-input"
+                    placeholder="Придумайте пароль"
+                    required
+                >
+
+                {% if form.password1.errors %}
+                    <div class="field-error">
+                        {{ form.password1.errors|striptags }}
+                    </div>
+                {% endif %}
+
+                <div class="auth-help-text">
+                    Пароль не должен быть слишком простым или похожим на логин.
+                </div>
+            </div>
+
+            <div class="auth-field">
+                <label for="id_password2" class="auth-label">Повторите пароль</label>
+                <input
+                    type="password"
+                    name="password2"
+                    id="id_password2"
+                    class="auth-input"
+                    placeholder="Повторите пароль"
+                    required
+                >
+
+                {% if form.password2.errors %}
+                    <div class="field-error">
+                        {{ form.password2.errors|striptags }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="auth-button">
+                Зарегистрироваться
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            Уже есть аккаунт?
+            <a href="{% url 'login' %}">Войти</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

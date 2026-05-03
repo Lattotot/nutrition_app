@@ -1,0 +1,418 @@
+{% extends "users/base.html" %}
+{% load profile_extras %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<style>
+    .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+    }
+
+    .profile-title {
+        font-size: 34px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 6px;
+    }
+
+    .profile-subtitle {
+        color: #6b7280;
+        margin-bottom: 0;
+        font-size: 16px;
+    }
+
+    .profile-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        border: none;
+        height: 100%;
+    }
+
+    .section-card {
+        background: #ffffff;
+        border-radius: 24px;
+        padding: 28px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+        border: none;
+    }
+
+    .section-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 18px;
+    }
+
+    .soft-badge {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .bg-soft-primary {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .bg-soft-success {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .bg-soft-warning {
+        background: #ffedd5;
+        color: #c2410c;
+    }
+
+    .bg-soft-danger {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .profile-mini-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 18px;
+        padding: 20px;
+        background: #ffffff;
+        height: 100%;
+    }
+
+    .profile-mini-label {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .profile-mini-value {
+        font-size: 26px;
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.2;
+    }
+
+    .profile-mini-value.small-value {
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+    .status-box {
+        background: #f8fafc;
+        border-radius: 18px;
+        padding: 20px;
+    }
+
+    .status-label {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .status-value {
+        font-size: 18px;
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.45;
+    }
+
+    .bmi-scale {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .bmi-scale-item {
+        border-radius: 14px;
+        padding: 12px 10px;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+    }
+
+    .bmi-scale-title {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 4px;
+    }
+
+    .bmi-scale-value {
+        font-size: 14px;
+        font-weight: 800;
+        color: #111827;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .profile-title {
+            font-size: 34px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .profile-subtitle {
+            font-size: 17px;
+            line-height: 1.45;
+            margin-bottom: 18px;
+        }
+
+        .profile-header .btn {
+            width: 100%;
+            min-height: 48px;
+            font-size: 17px;
+        }
+
+        .profile-card,
+        .section-card {
+            padding: 20px;
+            border-radius: 22px;
+        }
+
+        .section-title {
+            font-size: 22px;
+        }
+
+        .badge-row {
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .soft-badge {
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+
+        .profile-mini-card {
+            padding: 18px;
+            border-radius: 18px;
+        }
+
+        .profile-mini-label {
+            font-size: 15px;
+        }
+
+        .profile-mini-value {
+            font-size: 24px;
+        }
+
+        .profile-mini-value.small-value {
+            font-size: 17px;
+        }
+
+        .status-box {
+            padding: 18px;
+        }
+
+        .bmi-scale {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="profile-header">
+    <div>
+        <h1 class="profile-title">Профиль пользователя</h1>
+        <p class="profile-subtitle">
+            Основные персональные параметры для расчёта калорийности и рекомендаций
+        </p>
+    </div>
+
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+        Редактировать профиль
+    </a>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-12 col-lg-6">
+        <div class="profile-card">
+            <h2 class="section-title">Личные данные</h2>
+
+            <div class="badge-row">
+                <span class="soft-badge bg-soft-primary">
+                    {{ profile.user.username }}
+                </span>
+
+                <span class="soft-badge bg-soft-success">
+                    {{ profile.get_gender_display }}
+                </span>
+
+                <span class="soft-badge bg-soft-warning">
+                    {{ profile.age|ru_age }}
+                </span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <div class="profile-mini-card">
+                        <div class="profile-mini-label">Рост</div>
+                        <div class="profile-mini-value">{{ profile.height }} см</div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="profile-mini-card">
+                        <div class="profile-mini-label">Цель</div>
+                        <div class="profile-mini-value small-value">
+                            {{ profile.get_goal_display }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+        <div class="profile-card">
+            <h2 class="section-title">Параметры веса</h2>
+
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-md-6">
+                    <div class="profile-mini-card">
+                        <div class="profile-mini-label">Текущий вес</div>
+                        <div class="profile-mini-value">
+                            {{ profile.current_weight|floatformat:2 }} кг
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="profile-mini-card">
+                        <div class="profile-mini-label">Целевой вес</div>
+                        <div class="profile-mini-value">
+                            {{ profile.target_weight|floatformat:2 }} кг
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="status-box">
+                <div class="status-label">Статус профиля</div>
+                <div class="status-value">
+                    {{ profile.get_profile_status_display }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-3">
+        <div>
+            <h2 class="section-title mb-1">Индекс массы тела</h2>
+            <p class="text-muted mb-0">
+                Оценка соответствия текущего веса росту пользователя
+            </p>
+        </div>
+
+        <span class="soft-badge {{ bmi_status_class }}">
+            {{ bmi_category }}
+        </span>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <div class="profile-mini-card">
+                <div class="profile-mini-label">Текущий ИМТ</div>
+                <div class="profile-mini-value">
+                    {% if bmi %}
+                        {{ bmi|floatformat:2 }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="profile-mini-card">
+                <div class="profile-mini-label">Категория</div>
+                <div class="profile-mini-value small-value">
+                    {{ bmi_category }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="profile-mini-card">
+                <div class="profile-mini-label">ИМТ целевого веса</div>
+                <div class="profile-mini-value">
+                    {% if target_bmi %}
+                        {{ target_bmi|floatformat:2 }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-box mt-3">
+        <div class="status-label">Оценка целевого веса</div>
+        <div class="status-value">
+            {{ target_bmi_category }}
+        </div>
+    </div>
+
+    {% if target_weight_warning %}
+        <div class="alert alert-warning mt-3 mb-0">
+            {{ target_weight_warning }}
+        </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <div class="fw-bold mb-2">Интерпретация ИМТ</div>
+
+        <div class="bmi-scale">
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">Менее 16</div>
+                <div class="bmi-scale-value">Выраженный дефицит</div>
+            </div>
+
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">16–18.5</div>
+                <div class="bmi-scale-value">Недостаточная масса</div>
+            </div>
+
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">18.5–24.9</div>
+                <div class="bmi-scale-value">Норма</div>
+            </div>
+
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">25–29.9</div>
+                <div class="bmi-scale-value">Избыточная масса</div>
+            </div>
+
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">30–39.9</div>
+                <div class="bmi-scale-value">Ожирение</div>
+            </div>
+
+            <div class="bmi-scale-item">
+                <div class="bmi-scale-title">40 и более</div>
+                <div class="bmi-scale-value">Тяжёлое ожирение</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "users/base.html" %}
+
+{% block title %}Удаление записи{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-4">Удаление записи</h1>
+
+                <p>Вы действительно хотите удалить запись?</p>
+
+                <div class="alert alert-warning">
+                    <strong>{{ entry.product.name }}</strong><br>
+                    Тип приёма пищи: {{ entry.get_meal_type_display }}<br>
+                    Количество: {{ entry.amount_grams }} г<br>
+                    Дата: {{ entry.date }}
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                    <a href="/meals/" class="btn btn-outline-secondary">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

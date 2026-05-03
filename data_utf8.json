@@ -1,0 +1,1291 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-04-26T17:38:47.521Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Профиль admin",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-04-26T17:39:29.690Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Куриная грудка",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-04-26T17:39:57.758Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Рис варёный",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-04-26T17:40:19.294Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "Яйцо куриное",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-04-26T17:40:42.795Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "admin — Яйцо куриное (breakfast)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-04-26T17:41:05.613Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "2",
+    "object_repr": "admin — Рис варёный (lunch)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-04-26T17:41:22.880Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "admin — Куриная грудка (dinner)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-04-26T17:47:11.143Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "admin — 82 кг (2026-04-23)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-04-26T17:47:35.066Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "admin — 81.7 кг (2026-04-24)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-04-26T17:47:55.962Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "admin — 81 кг (2026-04-26)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$AKsnkabFmDIw23xB1k2DYS$aw6Vy0YNSg1eTKfxUDhNKkypO0sNC/6aJsx4D73/eRc=",
+    "last_login": "2026-05-02T21:54:57.707Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "lattotot@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-04-26T17:32:25.186Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$QItJm3G0k7p0F7hj3qlIzL$ghZY/dBssGEuLXs0ex0M9DD6Y/amFz3Cf9B9f5llxeA=",
+    "last_login": "2026-04-26T18:44:24.147Z",
+    "is_superuser": false,
+    "username": "Сергей",
+    "first_name": "",
+    "last_name": "",
+    "email": "serg@tbank.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-26T18:44:23.842Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$PrrVipheUcJEEcZxqvJeJ5$il/M0VQbHNpMGU7Yaqr7phOmEukdvwnnUfxnzhFeiYA=",
+    "last_login": "2026-04-26T18:53:55.417Z",
+    "is_superuser": false,
+    "username": "Александр",
+    "first_name": "",
+    "last_name": "",
+    "email": "sanya228@tbank.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-26T18:53:55.044Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$54INeURDmO8eWDxP0nryTX$HBc4b5S4khuOaPPGYi5vKGLJNSrYmoCCVt2wl/rt1+Y=",
+    "last_login": "2026-04-26T21:18:14.320Z",
+    "is_superuser": false,
+    "username": "Егор",
+    "first_name": "",
+    "last_name": "",
+    "email": "egorchick@tbank.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-26T21:12:10.116Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$onkivkgK7dDu5H6VMMVba3$Pjlcd0ohyRrNkvmb9LK/gfQfsKLttPd6YrkTDWyX8ik=",
+    "last_login": "2026-04-28T20:17:44.375Z",
+    "is_superuser": false,
+    "username": "Кристина",
+    "first_name": "",
+    "last_name": "",
+    "email": "kris@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-04-28T20:17:43.991Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "age": 22,
+    "gender": "male",
+    "height": 180,
+    "current_weight": "81.20",
+    "target_weight": "75.00",
+    "goal": "lose",
+    "created_at": "2026-04-26T17:38:47.520Z",
+    "updated_at": "2026-04-26T19:00:02.037Z"
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "age": 18,
+    "gender": "male",
+    "height": 170,
+    "current_weight": "70.00",
+    "target_weight": "70.00",
+    "goal": "maintain",
+    "created_at": "2026-04-26T18:44:24.142Z",
+    "updated_at": "2026-04-26T18:44:24.142Z"
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "age": 21,
+    "gender": "male",
+    "height": 185,
+    "current_weight": "80.00",
+    "target_weight": "72.00",
+    "goal": "lose",
+    "created_at": "2026-04-26T18:53:55.412Z",
+    "updated_at": "2026-04-26T18:55:20.825Z"
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "age": 19,
+    "gender": "male",
+    "height": 185,
+    "current_weight": "100.00",
+    "target_weight": "30.00",
+    "goal": "lose",
+    "created_at": "2026-04-26T21:12:10.456Z",
+    "updated_at": "2026-04-26T21:18:45.603Z"
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "age": 24,
+    "gender": "female",
+    "height": 172,
+    "current_weight": "55.00",
+    "target_weight": "55.00",
+    "goal": "gain",
+    "created_at": "2026-04-28T20:17:44.370Z",
+    "updated_at": "2026-04-28T20:19:35.051Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 1,
+  "fields": {
+    "name": "Куриная грудка",
+    "calories": "165.00",
+    "proteins": "31.00",
+    "fats": "3.60",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-04-26T17:39:29.690Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 2,
+  "fields": {
+    "name": "Рис варёный",
+    "calories": "115.00",
+    "proteins": "2.20",
+    "fats": "0.50",
+    "carbs": "25.00",
+    "is_custom": false,
+    "created_at": "2026-04-26T17:39:57.757Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 3,
+  "fields": {
+    "name": "Яйцо куриное",
+    "calories": "155.00",
+    "proteins": "13.00",
+    "fats": "11.00",
+    "carbs": "1.10",
+    "is_custom": false,
+    "created_at": "2026-04-26T17:40:19.293Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 4,
+  "fields": {
+    "name": "Хлеб пшеничный",
+    "calories": "265.00",
+    "proteins": "8.30",
+    "fats": "3.20",
+    "carbs": "49.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.484Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 5,
+  "fields": {
+    "name": "Хлеб ржаной",
+    "calories": "259.00",
+    "proteins": "8.80",
+    "fats": "3.30",
+    "carbs": "48.90",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.487Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 6,
+  "fields": {
+    "name": "Яблоко",
+    "calories": "52.00",
+    "proteins": "0.30",
+    "fats": "0.20",
+    "carbs": "14.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.489Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 7,
+  "fields": {
+    "name": "Банан",
+    "calories": "89.00",
+    "proteins": "1.10",
+    "fats": "0.30",
+    "carbs": "23.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.491Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 8,
+  "fields": {
+    "name": "Груша",
+    "calories": "57.00",
+    "proteins": "0.40",
+    "fats": "0.10",
+    "carbs": "15.20",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.494Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 9,
+  "fields": {
+    "name": "Апельсин",
+    "calories": "47.00",
+    "proteins": "0.90",
+    "fats": "0.10",
+    "carbs": "12.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.496Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 10,
+  "fields": {
+    "name": "Мандарин",
+    "calories": "53.00",
+    "proteins": "0.80",
+    "fats": "0.30",
+    "carbs": "13.30",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.498Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 11,
+  "fields": {
+    "name": "Киви",
+    "calories": "61.00",
+    "proteins": "1.10",
+    "fats": "0.50",
+    "carbs": "14.70",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.500Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 12,
+  "fields": {
+    "name": "Виноград",
+    "calories": "69.00",
+    "proteins": "0.70",
+    "fats": "0.20",
+    "carbs": "18.10",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.502Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 13,
+  "fields": {
+    "name": "Молоко 3.2%",
+    "calories": "62.00",
+    "proteins": "3.40",
+    "fats": "3.20",
+    "carbs": "4.80",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.504Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 14,
+  "fields": {
+    "name": "Кефир 2.5%",
+    "calories": "40.00",
+    "proteins": "3.10",
+    "fats": "2.50",
+    "carbs": "4.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.506Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 15,
+  "fields": {
+    "name": "Творог 5%",
+    "calories": "133.00",
+    "proteins": "16.00",
+    "fats": "5.00",
+    "carbs": "3.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.509Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 16,
+  "fields": {
+    "name": "Творог нежирный 1.8%",
+    "calories": "98.00",
+    "proteins": "16.00",
+    "fats": "1.80",
+    "carbs": "3.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.511Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 17,
+  "fields": {
+    "name": "Сметана 20%",
+    "calories": "206.00",
+    "proteins": "2.40",
+    "fats": "20.00",
+    "carbs": "2.90",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.513Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 18,
+  "fields": {
+    "name": "Йогурт натуральный",
+    "calories": "61.00",
+    "proteins": "3.50",
+    "fats": "3.30",
+    "carbs": "4.70",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.515Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 19,
+  "fields": {
+    "name": "Сыр российский",
+    "calories": "368.00",
+    "proteins": "24.70",
+    "fats": "28.00",
+    "carbs": "0.70",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.517Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 20,
+  "fields": {
+    "name": "Сыр голландский",
+    "calories": "356.00",
+    "proteins": "24.90",
+    "fats": "27.00",
+    "carbs": "0.40",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.520Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 21,
+  "fields": {
+    "name": "Масло сливочное",
+    "calories": "748.00",
+    "proteins": "0.50",
+    "fats": "82.50",
+    "carbs": "0.50",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.522Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 22,
+  "fields": {
+    "name": "Оливковое масло",
+    "calories": "884.00",
+    "proteins": "0.00",
+    "fats": "100.00",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.525Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 23,
+  "fields": {
+    "name": "Растительное масло",
+    "calories": "884.00",
+    "proteins": "0.00",
+    "fats": "100.00",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.527Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 24,
+  "fields": {
+    "name": "Куриные бедра",
+    "calories": "209.00",
+    "proteins": "26.00",
+    "fats": "10.90",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.535Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 25,
+  "fields": {
+    "name": "Говядина",
+    "calories": "250.00",
+    "proteins": "26.00",
+    "fats": "15.00",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.537Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 26,
+  "fields": {
+    "name": "Свинина",
+    "calories": "242.00",
+    "proteins": "16.00",
+    "fats": "19.00",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.539Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 27,
+  "fields": {
+    "name": "Лосось",
+    "calories": "208.00",
+    "proteins": "20.40",
+    "fats": "13.40",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.542Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 28,
+  "fields": {
+    "name": "Сельдь",
+    "calories": "234.00",
+    "proteins": "18.00",
+    "fats": "17.00",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.544Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 29,
+  "fields": {
+    "name": "Треска",
+    "calories": "82.00",
+    "proteins": "18.00",
+    "fats": "0.70",
+    "carbs": "0.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.546Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 30,
+  "fields": {
+    "name": "Картофель",
+    "calories": "77.00",
+    "proteins": "2.00",
+    "fats": "0.10",
+    "carbs": "17.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.548Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 31,
+  "fields": {
+    "name": "Морковь",
+    "calories": "41.00",
+    "proteins": "0.90",
+    "fats": "0.20",
+    "carbs": "9.60",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.550Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 32,
+  "fields": {
+    "name": "Свекла",
+    "calories": "43.00",
+    "proteins": "1.60",
+    "fats": "0.20",
+    "carbs": "9.60",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.553Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 33,
+  "fields": {
+    "name": "Капуста белокочанная",
+    "calories": "25.00",
+    "proteins": "1.30",
+    "fats": "0.10",
+    "carbs": "5.80",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.555Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 34,
+  "fields": {
+    "name": "Огурец",
+    "calories": "16.00",
+    "proteins": "0.70",
+    "fats": "0.10",
+    "carbs": "3.60",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.557Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 35,
+  "fields": {
+    "name": "Помидор",
+    "calories": "18.00",
+    "proteins": "0.90",
+    "fats": "0.20",
+    "carbs": "3.90",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.560Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 36,
+  "fields": {
+    "name": "Лук репчатый",
+    "calories": "40.00",
+    "proteins": "1.10",
+    "fats": "0.10",
+    "carbs": "9.30",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.562Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 37,
+  "fields": {
+    "name": "Чеснок",
+    "calories": "149.00",
+    "proteins": "6.40",
+    "fats": "0.50",
+    "carbs": "33.10",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.564Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 38,
+  "fields": {
+    "name": "Гречка",
+    "calories": "343.00",
+    "proteins": "13.00",
+    "fats": "3.40",
+    "carbs": "68.10",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.567Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 39,
+  "fields": {
+    "name": "Овсянка",
+    "calories": "379.00",
+    "proteins": "13.50",
+    "fats": "6.90",
+    "carbs": "64.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.571Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 40,
+  "fields": {
+    "name": "Рис белый",
+    "calories": "130.00",
+    "proteins": "2.40",
+    "fats": "0.30",
+    "carbs": "28.70",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.574Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 41,
+  "fields": {
+    "name": "Ячневая каша",
+    "calories": "119.00",
+    "proteins": "3.50",
+    "fats": "0.70",
+    "carbs": "25.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.576Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 42,
+  "fields": {
+    "name": "Фасоль белая",
+    "calories": "339.00",
+    "proteins": "21.40",
+    "fats": "1.20",
+    "carbs": "60.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.578Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 43,
+  "fields": {
+    "name": "Чечевица",
+    "calories": "353.00",
+    "proteins": "24.60",
+    "fats": "1.10",
+    "carbs": "60.10",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.580Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 44,
+  "fields": {
+    "name": "Горох",
+    "calories": "341.00",
+    "proteins": "24.60",
+    "fats": "1.20",
+    "carbs": "60.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.582Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 45,
+  "fields": {
+    "name": "Грецкий орех",
+    "calories": "654.00",
+    "proteins": "15.20",
+    "fats": "65.20",
+    "carbs": "13.70",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.584Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 46,
+  "fields": {
+    "name": "Миндаль",
+    "calories": "579.00",
+    "proteins": "21.20",
+    "fats": "49.90",
+    "carbs": "21.60",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.589Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 47,
+  "fields": {
+    "name": "Сахар",
+    "calories": "387.00",
+    "proteins": "0.00",
+    "fats": "0.00",
+    "carbs": "99.80",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.592Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 48,
+  "fields": {
+    "name": "Мёд",
+    "calories": "304.00",
+    "proteins": "0.30",
+    "fats": "0.00",
+    "carbs": "82.40",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.595Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 49,
+  "fields": {
+    "name": "Шоколад тёмный",
+    "calories": "546.00",
+    "proteins": "4.90",
+    "fats": "31.30",
+    "carbs": "47.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.597Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 50,
+  "fields": {
+    "name": "Томатная паста",
+    "calories": "82.00",
+    "proteins": "4.00",
+    "fats": "0.30",
+    "carbs": "16.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.599Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 51,
+  "fields": {
+    "name": "Морская капуста",
+    "calories": "43.00",
+    "proteins": "1.70",
+    "fats": "0.60",
+    "carbs": "6.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.601Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 52,
+  "fields": {
+    "name": "Пельмени",
+    "calories": "227.00",
+    "proteins": "10.20",
+    "fats": "9.50",
+    "carbs": "24.80",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.604Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 53,
+  "fields": {
+    "name": "Вареники с картошкой",
+    "calories": "220.00",
+    "proteins": "5.50",
+    "fats": "4.50",
+    "carbs": "37.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.606Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 54,
+  "fields": {
+    "name": "Борщ",
+    "calories": "41.00",
+    "proteins": "1.30",
+    "fats": "1.30",
+    "carbs": "6.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.608Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 55,
+  "fields": {
+    "name": "Куриный суп",
+    "calories": "34.00",
+    "proteins": "2.00",
+    "fats": "1.00",
+    "carbs": "3.50",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.610Z"
+  }
+},
+{
+  "model": "users.product",
+  "pk": 56,
+  "fields": {
+    "name": "Овощной салат",
+    "calories": "27.00",
+    "proteins": "1.20",
+    "fats": "0.30",
+    "carbs": "5.00",
+    "is_custom": false,
+    "created_at": "2026-05-02T21:43:48.613Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "product": 3,
+    "meal_type": "breakfast",
+    "amount_grams": "120.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T17:40:42.794Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "product": 2,
+    "meal_type": "lunch",
+    "amount_grams": "200.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T17:41:05.612Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "meal_type": "dinner",
+    "amount_grams": "180.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T17:41:22.879Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "meal_type": "breakfast",
+    "amount_grams": "100.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T18:16:07.110Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "product": 2,
+    "meal_type": "lunch",
+    "amount_grams": "100.00",
+    "date": "2026-04-27",
+    "created_at": "2026-04-26T18:16:21.981Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "product": 1,
+    "meal_type": "lunch",
+    "amount_grams": "211.00",
+    "date": "2026-04-25",
+    "created_at": "2026-04-26T18:16:35.066Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 8,
+  "fields": {
+    "user": 4,
+    "product": 1,
+    "meal_type": "breakfast",
+    "amount_grams": "1000.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T21:15:34.083Z"
+  }
+},
+{
+  "model": "users.mealentry",
+  "pk": 9,
+  "fields": {
+    "user": 4,
+    "product": 3,
+    "meal_type": "lunch",
+    "amount_grams": "1000.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T21:20:09.529Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "weight": "82.00",
+    "date": "2026-04-23",
+    "created_at": "2026-04-26T17:47:11.142Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "weight": "81.70",
+    "date": "2026-04-24",
+    "created_at": "2026-04-26T17:47:35.065Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "weight": "81.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T17:47:55.961Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "weight": "81.20",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T19:00:02.035Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 5,
+  "fields": {
+    "user": 4,
+    "weight": "108.00",
+    "date": "2026-04-26",
+    "created_at": "2026-04-26T21:18:30.478Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 6,
+  "fields": {
+    "user": 4,
+    "weight": "106.00",
+    "date": "2026-04-27",
+    "created_at": "2026-04-26T21:18:37.944Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 7,
+  "fields": {
+    "user": 4,
+    "weight": "100.00",
+    "date": "2026-04-28",
+    "created_at": "2026-04-26T21:18:45.600Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 8,
+  "fields": {
+    "user": 5,
+    "weight": "52.00",
+    "date": "2026-04-28",
+    "created_at": "2026-04-28T20:19:28.543Z"
+  }
+},
+{
+  "model": "users.weighthistory",
+  "pk": 9,
+  "fields": {
+    "user": 5,
+    "weight": "55.00",
+    "date": "2026-04-29",
+    "created_at": "2026-04-28T20:19:35.049Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 250,
+    "created_at": "2026-04-26T19:52:02.671Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 2,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 250,
+    "created_at": "2026-04-26T19:56:46.539Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 4,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 500,
+    "created_at": "2026-04-26T20:13:41.783Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 5,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 500,
+    "created_at": "2026-04-26T20:13:43.229Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 6,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 500,
+    "created_at": "2026-04-26T20:13:43.907Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "date": "2026-04-26",
+    "amount_ml": 500,
+    "created_at": "2026-04-26T20:13:44.291Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 8,
+  "fields": {
+    "user": 4,
+    "date": "2026-04-26",
+    "amount_ml": 250,
+    "created_at": "2026-04-26T21:14:50.725Z"
+  }
+},
+{
+  "model": "users.waterentry",
+  "pk": 9,
+  "fields": {
+    "user": 4,
+    "date": "2026-04-26",
+    "amount_ml": 250,
+    "created_at": "2026-04-26T21:14:51.795Z"
+  }
+}
+]

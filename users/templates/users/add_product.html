@@ -1,0 +1,124 @@
+{% extends "users/base.html" %}
+
+{% block title %}Добавление продукта{% endblock %}
+
+{% block content %}
+<style>
+    .form-card {
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        border: none;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .form-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+        color: #6b7280;
+        margin-bottom: 26px;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 8px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+        .form-card {
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .form-title {
+            font-size: 24px;
+        }
+
+        .form-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="form-card">
+    <h1 class="form-title">Добавление своего продукта</h1>
+    <p class="form-subtitle">
+        Укажите пищевую ценность продукта на 100 г. После сохранения продукт появится в общем списке.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Название продукта</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-danger small mt-1">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Калории, ккал на 100 г</label>
+            {{ form.calories }}
+            {% if form.calories.errors %}
+                <div class="text-danger small mt-1">{{ form.calories.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Белки, г на 100 г</label>
+            {{ form.proteins }}
+            {% if form.proteins.errors %}
+                <div class="text-danger small mt-1">{{ form.proteins.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Жиры, г на 100 г</label>
+            {{ form.fats }}
+            {% if form.fats.errors %}
+                <div class="text-danger small mt-1">{{ form.fats.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Углеводы, г на 100 г</label>
+            {{ form.carbs }}
+            {% if form.carbs.errors %}
+                <div class="text-danger small mt-1">{{ form.carbs.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить продукт</button>
+
+            {% if selected_date_str %}
+                <a href="/add-meal/?date={{ selected_date_str }}" class="btn btn-outline-secondary">Назад</a>
+            {% else %}
+                <a href="/add-meal/" class="btn btn-outline-secondary">Назад</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

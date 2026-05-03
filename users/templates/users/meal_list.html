@@ -1,0 +1,872 @@
+{% extends "users/base.html" %}
+
+{% block title %}Рацион{% endblock %}
+
+{% block content %}
+<style>
+    .metric-badge {
+        display: inline-block;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .metric-badge.blue {
+        background: #e0ecff;
+        color: #2563eb;
+    }
+
+    .metric-badge.green {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .metric-badge.orange {
+        background: #ffedd5;
+        color: #c2410c;
+    }
+
+    .metric-badge.red {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .section-card {
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        border: none;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 16px;
+    }
+
+    .date-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: end;
+    }
+
+    .date-toolbar .form-group {
+        min-width: 240px;
+        flex: 1;
+    }
+
+    .date-toolbar .btn {
+        min-width: 120px;
+    }
+
+    .macro-ring-card {
+        position: relative;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        height: 100%;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .macro-ring {
+        width: 124px;
+        height: 72px;
+        margin: 0 auto 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .macro-ring::before {
+        content: "";
+        position: absolute;
+        width: 124px;
+        height: 124px;
+        left: 0;
+        top: 0;
+        border-radius: 50%;
+        background:
+            conic-gradient(
+                from 270deg,
+                var(--ring-color) calc(var(--progress) * 1.8deg),
+                #e5e7eb 0deg 180deg,
+                transparent 180deg 360deg
+            );
+    }
+
+    .macro-ring::after {
+        content: "";
+        position: absolute;
+        width: 88px;
+        height: 88px;
+        left: 18px;
+        top: 18px;
+        border-radius: 50%;
+        background: #ffffff;
+    }
+
+    .macro-percent {
+        position: absolute;
+        top: 54px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        font-size: 13px;
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .macro-title {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 8px;
+    }
+
+    .macro-value {
+        font-size: 38px;
+        font-weight: 800;
+        color: #111827;
+        line-height: 1;
+        margin-bottom: 10px;
+    }
+
+    .macro-target {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 12px;
+        min-height: 20px;
+    }
+
+    .macro-ring-blue {
+        --ring-color: #3b82f6;
+    }
+
+    .macro-ring-green {
+        --ring-color: #22c55e;
+    }
+
+    .macro-ring-orange {
+        --ring-color: #f97316;
+    }
+
+    .macro-ring-red {
+        --ring-color: #ef4444;
+    }
+
+    .mini-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 18px 20px;
+        height: 100%;
+        background: #ffffff;
+    }
+
+    .mini-card .label {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 6px;
+    }
+
+    .mini-card .value {
+        font-size: 20px;
+        font-weight: 800;
+        color: #111827;
+    }
+
+    .progress-custom {
+        height: 18px;
+        border-radius: 999px;
+        background: #e5e7eb;
+        overflow: hidden;
+    }
+
+    .progress-custom .progress-bar {
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    .recommendation-list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .recommendation-list li {
+        background: #f8fafc;
+        border-radius: 14px;
+        padding: 14px 16px;
+    }
+
+    .recommendation-list li + li {
+        margin-top: 10px;
+    }
+
+    .meal-card {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        border: none;
+        height: 100%;
+    }
+
+    .meal-list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .meal-list li + li {
+        margin-top: 14px;
+    }
+
+    .meal-product-name {
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .meal-product-amount {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    .action-toolbar {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    .action-panel {
+        display: none;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .action-panel.active {
+        display: block;
+    }
+
+    .action-panel-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 10px;
+    }
+
+    .action-list {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .action-list li + li {
+        margin-top: 8px;
+    }
+
+    .action-link {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .action-link.edit {
+        background: #eff6ff;
+        color: #2563eb;
+        border: 1px solid #bfdbfe;
+    }
+
+    .action-link.edit:hover {
+        background: #dbeafe;
+    }
+
+    .action-link.delete {
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #fecaca;
+    }
+
+    .action-link.delete:hover {
+        background: #fee2e2;
+    }
+
+    .mobile-analytics-toggle {
+        background: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        padding: 0;
+        overflow: hidden;
+        margin-bottom: 24px;
+    }
+
+    .mobile-analytics-toggle summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 18px 20px;
+        font-size: 18px;
+        font-weight: 800;
+        color: #111827;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mobile-analytics-toggle summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .mobile-analytics-content {
+        padding: 0 20px 20px 20px;
+        border-top: 1px solid #eef2f7;
+    }
+
+    .mobile-inline-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .mobile-inline-buttons .btn-wide {
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 768px) {
+        .section-card {
+            padding: 20px;
+            border-radius: 22px;
+        }
+
+        .date-toolbar {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .date-toolbar .form-group {
+            grid-column: 1 / -1;
+            min-width: 0;
+        }
+
+        .date-toolbar .btn {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .date-toolbar button[type="submit"] {
+            grid-column: 1 / -1;
+        }
+
+        .macro-ring-card {
+            padding: 22px 18px;
+        }
+
+        .macro-value {
+            font-size: 34px;
+        }
+
+        .mini-card {
+            padding: 16px;
+        }
+    }
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+        <h1 class="h2 fw-bold mb-1">Рацион за {{ selected_date|date:"j E Y" }}</h1>
+        <p class="text-muted mb-0">Сводка по питанию, БЖУ и персонализированным рекомендациям</p>
+    </div>
+
+    <a href="{% url 'add_meal' %}?date={{ selected_date_str }}" class="btn btn-primary">
+        Добавить запись
+    </a>
+</div>
+
+<div class="section-card mb-4">
+    <form method="get" class="date-toolbar">
+        <a href="?date={{ previous_date_str }}" class="btn btn-outline-secondary">← Назад</a>
+
+        <div class="form-group">
+            <label for="date" class="form-label fw-semibold">Дата:</label>
+            <input
+                type="date"
+                id="date"
+                name="date"
+                value="{{ selected_date_str }}"
+                class="form-control"
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Показать</button>
+        <a href="{% url 'meals' %}" class="btn btn-outline-dark">Сегодня</a>
+        <a href="?date={{ next_date_str }}" class="btn btn-outline-secondary">Вперёд →</a>
+    </form>
+</div>
+
+<div class="d-none d-md-block">
+    <div class="row g-4 mb-4">
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="macro-ring-card">
+                <div class="macro-ring macro-ring-blue" style="--progress: {{ calories_percent }};"></div>
+                <div class="macro-percent">{{ calories_percent }}%</div>
+
+                <div class="macro-title">Калории</div>
+                <div class="macro-value">{{ total_calories|floatformat:1 }}</div>
+                <div class="macro-target">цель: {{ target_calories|floatformat:1 }}</div>
+                <span class="metric-badge blue">ккал</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="macro-ring-card">
+                <div class="macro-ring macro-ring-green" style="--progress: {{ proteins_percent }};"></div>
+                <div class="macro-percent">{{ proteins_percent }}%</div>
+
+                <div class="macro-title">Белки</div>
+                <div class="macro-value">{{ total_proteins|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_proteins|floatformat:2 }} г · осталось: {{ remaining_proteins|floatformat:2 }} г
+                </div>
+                <span class="metric-badge green">грамм</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="macro-ring-card">
+                <div class="macro-ring macro-ring-orange" style="--progress: {{ fats_percent }};"></div>
+                <div class="macro-percent">{{ fats_percent }}%</div>
+
+                <div class="macro-title">Жиры</div>
+                <div class="macro-value">{{ total_fats|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_fats|floatformat:2 }} г · осталось: {{ remaining_fats|floatformat:2 }} г
+                </div>
+                <span class="metric-badge orange">грамм</span>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="macro-ring-card">
+                <div class="macro-ring macro-ring-red" style="--progress: {{ carbs_percent }};"></div>
+                <div class="macro-percent">{{ carbs_percent }}%</div>
+
+                <div class="macro-title">Углеводы</div>
+                <div class="macro-value">{{ total_carbs|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_carbs|floatformat:2 }} г · осталось: {{ remaining_carbs|floatformat:2 }} г
+                </div>
+                <span class="metric-badge red">грамм</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-block d-md-none">
+    <div class="macro-ring-card mb-4">
+        <div class="macro-ring macro-ring-blue" style="--progress: {{ calories_percent }};"></div>
+        <div class="macro-percent">{{ calories_percent }}%</div>
+
+        <div class="macro-title">Калории</div>
+        <div class="macro-value">{{ total_calories|floatformat:1 }}</div>
+        <div class="macro-target">цель: {{ target_calories|floatformat:1 }}</div>
+        <span class="metric-badge blue">ккал</span>
+    </div>
+
+    <details class="mobile-analytics-toggle">
+        <summary>
+            <span>Показать БЖУ</span>
+            <span>▾</span>
+        </summary>
+
+        <div class="mobile-analytics-content">
+            <div class="macro-ring-card mb-3">
+                <div class="macro-ring macro-ring-green" style="--progress: {{ proteins_percent }};"></div>
+                <div class="macro-percent">{{ proteins_percent }}%</div>
+
+                <div class="macro-title">Белки</div>
+                <div class="macro-value">{{ total_proteins|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_proteins|floatformat:2 }} г · осталось: {{ remaining_proteins|floatformat:2 }} г
+                </div>
+                <span class="metric-badge green">грамм</span>
+            </div>
+
+            <div class="macro-ring-card mb-3">
+                <div class="macro-ring macro-ring-orange" style="--progress: {{ fats_percent }};"></div>
+                <div class="macro-percent">{{ fats_percent }}%</div>
+
+                <div class="macro-title">Жиры</div>
+                <div class="macro-value">{{ total_fats|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_fats|floatformat:2 }} г · осталось: {{ remaining_fats|floatformat:2 }} г
+                </div>
+                <span class="metric-badge orange">грамм</span>
+            </div>
+
+            <div class="macro-ring-card">
+                <div class="macro-ring macro-ring-red" style="--progress: {{ carbs_percent }};"></div>
+                <div class="macro-percent">{{ carbs_percent }}%</div>
+
+                <div class="macro-title">Углеводы</div>
+                <div class="macro-value">{{ total_carbs|floatformat:2 }}</div>
+                <div class="macro-target">
+                    цель: {{ target_carbs|floatformat:2 }} г · осталось: {{ remaining_carbs|floatformat:2 }} г
+                </div>
+                <span class="metric-badge red">грамм</span>
+            </div>
+        </div>
+    </details>
+</div>
+
+<div class="section-card mb-4">
+    <div class="section-title">Анализ рациона</div>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="mini-card">
+                <div class="label">Рекомендуемая калорийность</div>
+                <div class="value">{{ target_calories }} ккал</div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="mini-card">
+                <div class="label">Фактическая калорийность</div>
+                <div class="value">{{ total_calories }} ккал</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4">
+    <div class="row g-4">
+        <div class="col-md-6 col-xl-3">
+            <div class="meal-card">
+                <div class="section-title">Завтрак</div>
+
+                {% if breakfast_entries %}
+                    <div class="action-toolbar">
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleActionPanel('breakfast', 'edit')">Изменить</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="toggleActionPanel('breakfast', 'delete')">Удалить</button>
+                    </div>
+
+                    <ul class="meal-list">
+                        {% for entry in breakfast_entries %}
+                            <li>
+                                <div class="meal-product-name">{{ entry.product.name }}</div>
+                                <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="panel-breakfast-edit" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для редактирования</div>
+                        <ul class="action-list">
+                            {% for entry in breakfast_entries %}
+                                <li>
+                                    <a href="{% url 'edit_meal' entry.id %}" class="action-link edit">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div id="panel-breakfast-delete" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для удаления</div>
+                        <ul class="action-list">
+                            {% for entry in breakfast_entries %}
+                                <li>
+                                    <a href="{% url 'delete_meal' entry.id %}" class="action-link delete">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">Нет записей.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="meal-card">
+                <div class="section-title">Обед</div>
+
+                {% if lunch_entries %}
+                    <div class="action-toolbar">
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleActionPanel('lunch', 'edit')">Изменить</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="toggleActionPanel('lunch', 'delete')">Удалить</button>
+                    </div>
+
+                    <ul class="meal-list">
+                        {% for entry in lunch_entries %}
+                            <li>
+                                <div class="meal-product-name">{{ entry.product.name }}</div>
+                                <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="panel-lunch-edit" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для редактирования</div>
+                        <ul class="action-list">
+                            {% for entry in lunch_entries %}
+                                <li>
+                                    <a href="{% url 'edit_meal' entry.id %}" class="action-link edit">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div id="panel-lunch-delete" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для удаления</div>
+                        <ul class="action-list">
+                            {% for entry in lunch_entries %}
+                                <li>
+                                    <a href="{% url 'delete_meal' entry.id %}" class="action-link delete">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">Нет записей.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="meal-card">
+                <div class="section-title">Ужин</div>
+
+                {% if dinner_entries %}
+                    <div class="action-toolbar">
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleActionPanel('dinner', 'edit')">Изменить</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="toggleActionPanel('dinner', 'delete')">Удалить</button>
+                    </div>
+
+                    <ul class="meal-list">
+                        {% for entry in dinner_entries %}
+                            <li>
+                                <div class="meal-product-name">{{ entry.product.name }}</div>
+                                <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="panel-dinner-edit" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для редактирования</div>
+                        <ul class="action-list">
+                            {% for entry in dinner_entries %}
+                                <li>
+                                    <a href="{% url 'edit_meal' entry.id %}" class="action-link edit">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div id="panel-dinner-delete" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для удаления</div>
+                        <ul class="action-list">
+                            {% for entry in dinner_entries %}
+                                <li>
+                                    <a href="{% url 'delete_meal' entry.id %}" class="action-link delete">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">Нет записей.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="meal-card">
+                <div class="section-title">Перекусы</div>
+
+                {% if snack_entries %}
+                    <div class="action-toolbar">
+                        <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleActionPanel('snack', 'edit')">Изменить</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="toggleActionPanel('snack', 'delete')">Удалить</button>
+                    </div>
+
+                    <ul class="meal-list">
+                        {% for entry in snack_entries %}
+                            <li>
+                                <div class="meal-product-name">{{ entry.product.name }}</div>
+                                <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="panel-snack-edit" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для редактирования</div>
+                        <ul class="action-list">
+                            {% for entry in snack_entries %}
+                                <li>
+                                    <a href="{% url 'edit_meal' entry.id %}" class="action-link edit">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div id="panel-snack-delete" class="action-panel">
+                        <div class="action-panel-title">Выбери позицию для удаления</div>
+                        <ul class="action-list">
+                            {% for entry in snack_entries %}
+                                <li>
+                                    <a href="{% url 'delete_meal' entry.id %}" class="action-link delete">
+                                        {{ entry.product.name }} — {{ entry.amount_grams }} г
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% else %}
+                    <p class="text-muted mb-0">Нет записей.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+        <div>
+            <h3 class="mb-1 fw-bold">Водный баланс</h3>
+            <p class="text-muted mb-1">Контроль потребления воды за выбранный день</p>
+            <span class="metric-badge blue">{{ water_status }}</span>
+        </div>
+
+        <div class="d-none d-md-flex align-items-center gap-2 flex-wrap">
+            <span class="metric-badge blue">{{ water_percent }}%</span>
+            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" class="btn btn-primary">+ 250 мл</a>
+            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" class="btn btn-outline-primary">+ 500 мл</a>
+            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" class="btn btn-outline-danger">Убрать последний</a>
+        </div>
+    </div>
+
+    <div class="d-block d-md-none mb-3">
+        <div class="mobile-inline-buttons">
+            <div class="metric-badge blue d-flex align-items-center justify-content-center">{{ water_percent }}%</div>
+            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" class="btn btn-primary">+ 250 мл</a>
+            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" class="btn btn-outline-primary btn-wide">+ 500 мл</a>
+            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" class="btn btn-outline-danger btn-wide">Убрать последний</a>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-md-3">
+            <div class="mini-card">
+                <div class="label">Выпито воды</div>
+                <div class="value">{{ total_water }} мл</div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <div class="mini-card">
+                <div class="label">Дневная цель</div>
+                <div class="value">{{ target_water }} мл</div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <div class="mini-card">
+                <div class="label">Осталось выпить</div>
+                <div class="value">{{ remaining_water }} мл</div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <div class="mini-card">
+                <div class="label">Количество записей</div>
+                <div class="value">{{ water_count }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+            <div class="mini-card">
+                <div class="label">Средний объём одной записи</div>
+                <div class="value">
+                    {% if water_count > 0 %}
+                        {{ average_glass }} мл
+                    {% else %}
+                        0 мл
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="mini-card">
+                <div class="label">Прогресс дня</div>
+                <div class="value">{{ water_percent }}%</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress progress-custom">
+        <div
+            class="progress-bar bg-info"
+            role="progressbar"
+            style="width: {{ water_percent }}%;"
+            aria-valuenow="{{ water_percent }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+        >
+            {{ water_percent }}%
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4">
+    <div class="section-title">Персонализированные рекомендации</div>
+
+    <ul class="recommendation-list">
+        {% for recommendation in recommendations %}
+            <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<script>
+    function toggleActionPanel(mealType, mode) {
+        const editPanel = document.getElementById(`panel-${mealType}-edit`);
+        const deletePanel = document.getElementById(`panel-${mealType}-delete`);
+
+        if (mode === "edit") {
+            const isActive = editPanel.classList.contains("active");
+            editPanel.classList.toggle("active", !isActive);
+            deletePanel.classList.remove("active");
+        }
+
+        if (mode === "delete") {
+            const isActive = deletePanel.classList.contains("active");
+            deletePanel.classList.toggle("active", !isActive);
+            editPanel.classList.remove("active");
+        }
+    }
+</script>
+{% endblock %}

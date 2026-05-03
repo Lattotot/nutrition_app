@@ -1,0 +1,124 @@
+{% extends "users/base.html" %}
+
+{% block title %}Прогресс{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2 fw-bold mb-1">Прогресс пользователя</h1>
+        <p class="text-muted mb-0">Динамика веса и контроль достижения цели</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card app-card">
+            <div class="card-body p-4">
+                <div class="section-title">Текущие параметры</div>
+                <div class="d-flex flex-column gap-3">
+                    <div class="border rounded-4 p-3 bg-white">
+                        <div class="text-muted small">Текущий вес</div>
+                        <div class="fw-bold fs-4">{{ profile.current_weight }} кг</div>
+                    </div>
+                    <div class="border rounded-4 p-3 bg-white">
+                        <div class="text-muted small">Целевой вес</div>
+                        <div class="fw-bold fs-4">{{ profile.target_weight }} кг</div>
+                    </div>
+                    <div class="border rounded-4 p-3 bg-white">
+                        <div class="text-muted small">Цель</div>
+                        <div class="fw-semibold">{{ profile.get_goal_display }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card app-card mt-4">
+            <div class="card-body p-4">
+                <div class="section-title">Добавить новый вес</div>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Вес, кг</label>
+                        {{ form.weight }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Дата</label>
+                        {{ form.date }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить вес</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card app-card">
+            <div class="card-body p-4">
+                <div class="section-title">График изменения веса</div>
+                <canvas id="weightChart" height="120"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card app-card mt-4">
+    <div class="card-body p-4">
+        <div class="section-title">История веса</div>
+
+        {% if weight_entries %}
+            <ul class="list-group list-group-flush">
+                {% for entry in weight_entries %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <span>{{ entry.date }}</span>
+                        <strong>{{ entry.weight }} кг</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted mb-0">Записей по весу пока нет.</p>
+        {% endif %}
+    </div>
+</div>
+
+{{ labels|json_script:"weight-labels" }}
+{{ weights|json_script:"weight-values" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = JSON.parse(document.getElementById('weight-labels').textContent);
+    const weights = JSON.parse(document.getElementById('weight-values').textContent);
+
+    const ctx = document.getElementById('weightChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Вес, кг',
+                data: weights,
+                borderWidth: 3,
+                tension: 0.35,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

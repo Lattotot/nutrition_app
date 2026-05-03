@@ -1,0 +1,13 @@
+{% extends "users/base.html" %}
+
+{% block title %}Оффлайн{% endblock %}
+
+{% block content %}
+<div class="section-card text-center" style="max-width: 700px; margin: 40px auto;">
+    <h1 class="h2 fw-bold mb-3">Нет подключения к интернету</h1>
+    <p class="text-muted mb-4">
+        Похоже, сеть сейчас недоступна. Когда интернет появится, приложение снова сможет загружать данные.
+    </p>
+    <a href="/" class="btn btn-primary">Попробовать снова</a>
+</div>
+{% endblock %}

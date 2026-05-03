@@ -1,0 +1,193 @@
+{% extends "users/base.html" %}
+
+{% block title %}Редактирование питания{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+<style>
+    .form-card {
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 28px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        border: none;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .form-title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #111827;
+        margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+        color: #6b7280;
+        margin-bottom: 26px;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 8px;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 12px;
+        min-height: 46px;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+    }
+
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        height: 46px;
+        border: 1px solid #dee2e6;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        padding-left: 6px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #111827;
+        line-height: 46px;
+        padding-left: 10px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: #9ca3af;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 46px;
+        right: 10px;
+    }
+
+    .select2-dropdown {
+        border-radius: 12px;
+        border-color: #dee2e6;
+        overflow: hidden;
+    }
+
+    .select2-search--dropdown {
+        padding: 10px;
+    }
+
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+        border-radius: 10px;
+        border: 1px solid #dee2e6;
+        padding: 8px 10px;
+        outline: none;
+    }
+
+    .select2-results__option {
+        padding: 10px 12px;
+    }
+
+    @media (max-width: 768px) {
+        .form-card {
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .form-title {
+            font-size: 24px;
+        }
+
+        .form-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="form-card">
+    <h1 class="form-title">Редактирование записи о питании</h1>
+    <p class="form-subtitle">Измените продукт, приём пищи, количество или дату записи.</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label for="{{ form.product.id_for_label }}" class="form-label">Продукт</label>
+            {{ form.product }}
+            {% if form.product.errors %}
+                <div class="text-danger small mt-1">{{ form.product.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.meal_type.id_for_label }}" class="form-label">Тип приёма пищи</label>
+            {{ form.meal_type }}
+            {% if form.meal_type.errors %}
+                <div class="text-danger small mt-1">{{ form.meal_type.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.amount_grams.id_for_label }}" class="form-label">Количество, г</label>
+            {{ form.amount_grams }}
+            {% if form.amount_grams.errors %}
+                <div class="text-danger small mt-1">{{ form.amount_grams.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="{{ form.date.id_for_label }}" class="form-label">Дата</label>
+            {{ form.date }}
+            {% if form.date.errors %}
+                <div class="text-danger small mt-1">{{ form.date.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <a href="/meals/?date={{ form.instance.date|date:'Y-m-d' }}" class="btn btn-outline-secondary">Назад</a>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const productSelect = $("#id_product");
+
+        productSelect.select2({
+            placeholder: "Начните вводить название продукта",
+            allowClear: true,
+            width: "100%",
+            language: {
+                noResults: function () {
+                    return "Продукты не найдены";
+                },
+                searching: function () {
+                    return "Поиск...";
+                }
+            }
+        });
+
+        $("#id_meal_type").addClass("form-select");
+        $("#id_amount_grams").addClass("form-control");
+        $("#id_date").addClass("form-control");
+    });
+</script>
+{% endblock %}
