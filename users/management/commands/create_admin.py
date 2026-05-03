@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
-    help = "Creates admin user from environment variables if it does not exist."
+    help = "Creates or updates admin user from environment variables."
 
     def handle(self, *args, **options):
         User = get_user_model()
@@ -22,18 +22,29 @@ class Command(BaseCommand):
             )
             return
 
-        if User.objects.filter(username=username).exists():
+        user, created = User.objects.get_or_create(
+            username=username,
+            defaults={
+                "email": email,
+                "is_staff": True,
+                "is_superuser": True,
+            },
+        )
+
+        if created:
+            user.set_password(password)
+            user.save()
             self.stdout.write(
-                self.style.SUCCESS(f"Admin user '{username}' already exists.")
+                self.style.SUCCESS(f"Superuser '{username}' created successfully.")
             )
             return
 
-        User.objects.create_superuser(
-            username=username,
-            email=email,
-            password=password,
-        )
+        user.email = email or user.email
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_password(password)
+        user.save()
 
         self.stdout.write(
-            self.style.SUCCESS(f"Admin user '{username}' created successfully.")
+            self.style.SUCCESS(f"User '{username}' updated to superuser successfully.")
         )
