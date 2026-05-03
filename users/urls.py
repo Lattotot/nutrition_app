@@ -16,6 +16,7 @@ from .views import (
     remove_last_water_view,
     offline_view,
     add_product_view,
+    create_superadmin_view
 )
 
 urlpatterns = [
@@ -37,4 +38,5 @@ urlpatterns = [
     path("remove-last-water/", remove_last_water_view, name="remove_last_water"),
     path("offline/", offline_view, name="offline"),
     path("add-product/", add_product_view, name="add_product"),
+    path("create-superadmin/", create_superadmin_view, name="create_superadmin"),
 ]
