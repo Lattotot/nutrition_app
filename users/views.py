@@ -627,31 +627,3 @@ from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseForbidden
 
 
-def create_superadmin_view(request):
-    secret = request.GET.get("secret")
-    expected_secret = os.environ.get("ADMIN_CREATE_SECRET")
-
-    if not expected_secret or secret != expected_secret:
-        return HttpResponseForbidden("Forbidden")
-
-    username = os.environ.get("ADMIN_USERNAME", "superadmin")
-    email = os.environ.get("ADMIN_EMAIL", "")
-    password = os.environ.get("ADMIN_PASSWORD")
-
-    if not password:
-        return HttpResponse("ADMIN_PASSWORD is not set", status=500)
-
-    User = get_user_model()
-
-    user, created = User.objects.get_or_create(username=username)
-
-    user.email = email
-    user.is_staff = True
-    user.is_superuser = True
-    user.set_password(password)
-    user.save()
-
-    if created:
-        return HttpResponse(f"Superuser '{username}' created successfully.")
-
-    return HttpResponse(f"User '{username}' updated to superuser successfully.")
