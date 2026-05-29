@@ -7,11 +7,11 @@
 
 <style>
     .form-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 22px;
         padding: 28px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        border: none;
+        box-shadow: 0 10px 30px var(--theme-shadow);
+        border: 1px solid var(--theme-border);
         max-width: 720px;
         margin: 0 auto;
     }
@@ -19,18 +19,18 @@
     .form-title {
         font-size: 28px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         margin-bottom: 6px;
     }
 
     .form-subtitle {
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 26px;
     }
 
     .form-label {
         font-weight: 700;
-        color: #374151;
+        color: var(--theme-text);
         margin-bottom: 8px;
     }
 
@@ -53,7 +53,7 @@
 
     .select2-container--default .select2-selection--single {
         height: 46px;
-        border: 1px solid #dee2e6;
+        border: 1px solid var(--theme-border);
         border-radius: 12px;
         display: flex;
         align-items: center;
@@ -61,13 +61,13 @@
     }
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {
-        color: #111827;
+        color: var(--theme-text);
         line-height: 46px;
         padding-left: 10px;
     }
 
     .select2-container--default .select2-selection--single .select2-selection__placeholder {
-        color: #9ca3af;
+        color: var(--theme-muted);
     }
 
     .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -77,7 +77,7 @@
 
     .select2-dropdown {
         border-radius: 12px;
-        border-color: #dee2e6;
+        border-color: var(--theme-border);
         overflow: hidden;
     }
 
@@ -87,7 +87,7 @@
 
     .select2-container--default .select2-search--dropdown .select2-search__field {
         border-radius: 10px;
-        border: 1px solid #dee2e6;
+        border: 1px solid var(--theme-border);
         padding: 8px 10px;
         outline: none;
     }
@@ -97,8 +97,8 @@
     }
 
     .add-product-box {
-        background: #f8fafc;
-        border: 1px dashed #bfdbfe;
+        background: var(--theme-surface);
+        border: 1px dashed rgba(37, 99, 235, 0.35);
         border-radius: 14px;
         padding: 14px;
         margin-top: 12px;
@@ -106,8 +106,60 @@
 
     .add-product-text {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 10px;
+    }
+
+
+    html[data-theme="dark"] .select2-container--default .select2-selection--single {
+        background: var(--theme-surface);
+        border-color: var(--theme-border);
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .select2-container--default .select2-selection--single .select2-selection__placeholder {
+        color: var(--theme-muted);
+    }
+
+    html[data-theme="dark"] .select2-dropdown {
+        background: var(--theme-card);
+        border-color: var(--theme-border);
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .select2-container--default .select2-search--dropdown .select2-search__field {
+        background: var(--theme-surface);
+        border-color: var(--theme-border);
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .select2-results__option {
+        background: var(--theme-card);
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background: #2563eb;
+        color: #ffffff;
+    }
+
+    html[data-theme="dark"] .select2-container--default .select2-results__option[aria-selected=true] {
+        background: var(--theme-surface);
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary {
+        color: var(--theme-muted);
+        border-color: var(--theme-border);
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary:hover {
+        color: #ffffff;
+        background: #334155;
     }
 
     @media (max-width: 768px) {
@@ -206,10 +258,39 @@
     $(document).ready(function () {
         const productSelect = $("#id_product");
 
+        function productMatcher(params, data) {
+            const term = $.trim(params.term || "").toLocaleLowerCase("ru-RU");
+
+            if (term === "") {
+                return data;
+            }
+
+            if (!data.text) {
+                return null;
+            }
+
+            const productName = $.trim(data.text).toLocaleLowerCase("ru-RU");
+            const words = productName.split(/\s+/);
+
+            /*
+             * Продукт показывается только тогда, когда название
+             * или одно из его слов начинается с введённого запроса.
+             * Например:
+             * "б"   -> "Банан", но не "Абрикос";
+             * "дом" -> "Апельсин домашний".
+             */
+            const hasMatchingWord = words.some(function (word) {
+                return word.startsWith(term);
+            });
+
+            return hasMatchingWord ? data : null;
+        }
+
         productSelect.select2({
             placeholder: "Начните вводить название продукта",
             allowClear: true,
             width: "100%",
+            matcher: productMatcher,
             language: {
                 noResults: function () {
                     return "Продукты не найдены";

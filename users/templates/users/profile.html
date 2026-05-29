@@ -17,37 +17,49 @@
     .profile-title {
         font-size: 34px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         margin-bottom: 6px;
     }
 
     .profile-subtitle {
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 0;
         font-size: 16px;
     }
 
+    .profile-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .mobile-logout-form {
+        display: none;
+    }
+
     .profile-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 24px;
         padding: 28px;
-        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-        border: none;
+        box-shadow: 0 12px 32px var(--theme-shadow);
+        border: 1px solid var(--theme-border);
         height: 100%;
+        transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .section-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 24px;
         padding: 28px;
-        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
-        border: none;
+        box-shadow: 0 12px 32px var(--theme-shadow);
+        border: 1px solid var(--theme-border);
+        transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .section-title {
         font-size: 22px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         margin-bottom: 18px;
     }
 
@@ -88,15 +100,16 @@
     }
 
     .profile-mini-card {
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--theme-border);
         border-radius: 18px;
         padding: 20px;
-        background: #ffffff;
+        background: var(--theme-surface);
         height: 100%;
+        transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .profile-mini-label {
-        color: #6b7280;
+        color: var(--theme-muted);
         font-size: 14px;
         margin-bottom: 8px;
     }
@@ -104,7 +117,7 @@
     .profile-mini-value {
         font-size: 26px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         line-height: 1.2;
     }
 
@@ -114,13 +127,13 @@
     }
 
     .status-box {
-        background: #f8fafc;
+        background: var(--theme-surface);
         border-radius: 18px;
         padding: 20px;
     }
 
     .status-label {
-        color: #6b7280;
+        color: var(--theme-muted);
         font-size: 14px;
         margin-bottom: 8px;
     }
@@ -128,7 +141,7 @@
     .status-value {
         font-size: 18px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         line-height: 1.45;
     }
 
@@ -142,20 +155,26 @@
     .bmi-scale-item {
         border-radius: 14px;
         padding: 12px 10px;
-        background: #f8fafc;
-        border: 1px solid #e5e7eb;
+        background: var(--theme-surface);
+        border: 1px solid var(--theme-border);
     }
 
     .bmi-scale-title {
         font-size: 13px;
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 4px;
     }
 
     .bmi-scale-value {
         font-size: 14px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
+    }
+
+    html[data-theme="dark"] .alert-warning {
+        background: rgba(245, 158, 11, 0.14);
+        border-color: rgba(245, 158, 11, 0.32);
+        color: #fcd34d;
     }
 
     @media (max-width: 768px) {
@@ -180,6 +199,22 @@
             width: 100%;
             min-height: 48px;
             font-size: 17px;
+        }
+
+        .profile-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            width: 100%;
+            gap: 10px;
+        }
+
+        .mobile-logout-form {
+            display: block;
+            width: 100%;
+        }
+
+        .mobile-logout-form .btn {
+            width: 100%;
         }
 
         .profile-card,
@@ -227,6 +262,210 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .profile-desktop-content {
+        display: block;
+    }
+
+    .profile-mobile-content {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .profile-header {
+            margin-bottom: 14px;
+        }
+
+        .profile-title {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .profile-subtitle {
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .profile-actions {
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .profile-actions .btn,
+        .mobile-logout-form .btn {
+            min-height: 44px;
+            padding: 9px 8px;
+            font-size: 14px;
+        }
+
+        .profile-desktop-content {
+            display: none;
+        }
+
+        .profile-mobile-content {
+            display: block;
+        }
+
+        .mobile-profile-card {
+            background: var(--theme-card);
+            border: 1px solid var(--theme-border);
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: 0 8px 22px var(--theme-shadow);
+            margin-bottom: 12px;
+        }
+
+        .mobile-profile-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--theme-text);
+            margin-bottom: 12px;
+        }
+
+        .mobile-profile-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .mobile-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .mobile-badge-row .soft-badge {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+        }
+
+        .mobile-profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 8px;
+        }
+
+        .mobile-profile-stat {
+            background: var(--theme-surface);
+            border: 1px solid var(--theme-border);
+            border-radius: 13px;
+            padding: 11px 12px;
+            min-height: 68px;
+        }
+
+        .mobile-profile-label {
+            font-size: 11px;
+            line-height: 1.25;
+            color: var(--theme-muted);
+            margin-bottom: 5px;
+        }
+
+        .mobile-profile-value {
+            font-size: 18px;
+            line-height: 1.25;
+            font-weight: 800;
+            color: var(--theme-text);
+        }
+
+        .mobile-profile-value.small {
+            font-size: 15px;
+        }
+
+        .mobile-bmi-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .mobile-bmi-top .mobile-profile-title {
+            margin-bottom: 0;
+        }
+
+        .mobile-bmi-top .soft-badge {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+        }
+
+        .mobile-bmi-note {
+            margin-top: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: var(--theme-surface);
+            border: 1px solid var(--theme-border);
+            color: var(--theme-text);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .mobile-bmi-details {
+            background: var(--theme-card);
+            border: 1px solid var(--theme-border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 22px var(--theme-shadow);
+            margin-bottom: 12px;
+        }
+
+        .mobile-bmi-details summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 15px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            color: var(--theme-text);
+        }
+
+        .mobile-bmi-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-bmi-details summary::after {
+            content: "⌄";
+            font-size: 18px;
+            color: var(--theme-muted);
+            transition: transform .18s ease;
+        }
+
+        .mobile-bmi-details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .mobile-bmi-scale {
+            padding: 0 14px 14px;
+            border-top: 1px solid var(--theme-border);
+        }
+
+        .mobile-bmi-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 2px;
+            border-bottom: 1px solid var(--theme-border);
+            font-size: 13px;
+        }
+
+        .mobile-bmi-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .mobile-bmi-range {
+            color: var(--theme-muted);
+        }
+
+        .mobile-bmi-category {
+            color: var(--theme-text);
+            text-align: right;
+            font-weight: 700;
+        }
+    }
+
 </style>
 
 <div class="profile-header">
@@ -237,11 +476,21 @@
         </p>
     </div>
 
-    <a href="{% url 'edit_profile' %}" class="btn btn-primary">
-        Редактировать профиль
-    </a>
+    <div class="profile-actions">
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+            Редактировать профиль
+        </a>
+
+        <form method="post" action="{% url 'logout' %}" class="mobile-logout-form">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">
+                Выйти из аккаунта
+            </button>
+        </form>
+    </div>
 </div>
 
+<div class="profile-desktop-content">
 <div class="row g-4 mb-4">
     <div class="col-12 col-lg-6">
         <div class="profile-card">
@@ -415,4 +664,109 @@
         </div>
     </div>
 </div>
+</div>
+
+
+<div class="profile-mobile-content">
+    <div class="mobile-profile-card">
+        <div class="mobile-profile-head">
+            <div class="mobile-profile-title">Основные данные</div>
+            <span class="soft-badge bg-soft-success">
+                {{ profile.get_profile_status_display }}
+            </span>
+        </div>
+
+        <div class="mobile-badge-row mb-3">
+            <span class="soft-badge bg-soft-primary">{{ profile.user.username }}</span>
+            <span class="soft-badge bg-soft-success">{{ profile.get_gender_display }}</span>
+            <span class="soft-badge bg-soft-warning">{{ profile.age|ru_age }}</span>
+        </div>
+
+        <div class="mobile-profile-grid">
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">Рост</div>
+                <div class="mobile-profile-value">{{ profile.height }} см</div>
+            </div>
+
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">Цель</div>
+                <div class="mobile-profile-value small">{{ profile.get_goal_display }}</div>
+            </div>
+
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">Текущий вес</div>
+                <div class="mobile-profile-value">{{ profile.current_weight|floatformat:2 }} кг</div>
+            </div>
+
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">Целевой вес</div>
+                <div class="mobile-profile-value">{{ profile.target_weight|floatformat:2 }} кг</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-profile-card">
+        <div class="mobile-bmi-top">
+            <div class="mobile-profile-title">Индекс массы тела</div>
+            <span class="soft-badge {{ bmi_status_class }}">{{ bmi_category }}</span>
+        </div>
+
+        <div class="mobile-profile-grid">
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">Текущий ИМТ</div>
+                <div class="mobile-profile-value">
+                    {% if bmi %}{{ bmi|floatformat:2 }}{% else %}—{% endif %}
+                </div>
+            </div>
+
+            <div class="mobile-profile-stat">
+                <div class="mobile-profile-label">ИМТ целевого веса</div>
+                <div class="mobile-profile-value">
+                    {% if target_bmi %}{{ target_bmi|floatformat:2 }}{% else %}—{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-bmi-note">
+            {{ target_bmi_category }}
+        </div>
+
+        {% if target_weight_warning %}
+            <div class="alert alert-warning mt-2 mb-0 py-2">
+                {{ target_weight_warning }}
+            </div>
+        {% endif %}
+    </div>
+
+    <details class="mobile-bmi-details">
+        <summary>Справка по категориям ИМТ</summary>
+        <div class="mobile-bmi-scale">
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">Менее 16</span>
+                <span class="mobile-bmi-category">Выраженный дефицит</span>
+            </div>
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">16–18.5</span>
+                <span class="mobile-bmi-category">Недостаточная масса</span>
+            </div>
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">18.5–24.9</span>
+                <span class="mobile-bmi-category">Норма</span>
+            </div>
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">25–29.9</span>
+                <span class="mobile-bmi-category">Избыточная масса</span>
+            </div>
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">30–39.9</span>
+                <span class="mobile-bmi-category">Ожирение</span>
+            </div>
+            <div class="mobile-bmi-row">
+                <span class="mobile-bmi-range">40 и более</span>
+                <span class="mobile-bmi-category">Тяжёлое ожирение</span>
+            </div>
+        </div>
+    </details>
+</div>
+
 {% endblock %}

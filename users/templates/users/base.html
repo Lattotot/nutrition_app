@@ -12,6 +12,15 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script>
+        (function () {
+            const stored = localStorage.getItem("nutrition-theme");
+            const preferred = window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", stored || preferred);
+        })();
+    </script>
+
     <style>
         body {
             background: linear-gradient(180deg, #f4f7fb 0%, #eef3f9 100%);
@@ -271,9 +280,342 @@
             }
         }
     </style>
+
+    <style>
+        :root {
+            --theme-bg-start: #f4f7fb;
+            --theme-bg-end: #eef3f9;
+            --theme-card: #ffffff;
+            --theme-surface: #f8fafc;
+            --theme-text: #0f172a;
+            --theme-muted: #64748b;
+            --theme-border: #e2e8f0;
+            --theme-navbar-start: #1f6feb;
+            --theme-navbar-end: #3b82f6;
+            --theme-shadow: rgba(15, 23, 42, 0.08);
+        }
+
+        html[data-theme="dark"] {
+            color-scheme: dark;
+            --theme-bg-start: #070b14;
+            --theme-bg-end: #0b1220;
+            --theme-card: #111827;
+            --theme-surface: #182334;
+            --theme-text: #f1f5f9;
+            --theme-muted: #94a3b8;
+            --theme-border: #263449;
+            --theme-navbar-start: #0c1424;
+            --theme-navbar-end: #111d33;
+            --theme-shadow: rgba(0, 0, 0, 0.30);
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--theme-bg-start), var(--theme-bg-end)) !important;
+            color: var(--theme-text);
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .app-navbar {
+            background: linear-gradient(90deg, var(--theme-navbar-start), var(--theme-navbar-end)) !important;
+        }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #fff;
+            background: rgba(255, 255, 255, .14);
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 999px;
+            padding: 8px 13px;
+            margin-left: 12px;
+            line-height: 1;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, .23);
+        }
+
+        html[data-theme="dark"] .app-card,
+        html[data-theme="dark"] .metric-card,
+        html[data-theme="dark"] .card,
+        html[data-theme="dark"] .card-body,
+        html[data-theme="dark"] .section-card,
+        html[data-theme="dark"] .meal-card,
+        html[data-theme="dark"] .water-mini-card,
+        html[data-theme="dark"] .list-group-item,
+        html[data-theme="dark"] .accordion-item,
+        html[data-theme="dark"] details {
+            background: var(--theme-card) !important;
+            color: var(--theme-text) !important;
+            border-color: var(--theme-border) !important;
+            box-shadow: 0 10px 28px var(--theme-shadow);
+        }
+
+        html[data-theme="dark"] .text-muted,
+        html[data-theme="dark"] .form-text,
+        html[data-theme="dark"] small {
+            color: var(--theme-muted) !important;
+        }
+
+        html[data-theme="dark"] .form-control,
+        html[data-theme="dark"] .form-select,
+        html[data-theme="dark"] input,
+        html[data-theme="dark"] select,
+        html[data-theme="dark"] textarea {
+            background-color: var(--theme-surface) !important;
+            border-color: var(--theme-border) !important;
+            color: var(--theme-text) !important;
+        }
+
+        html[data-theme="dark"] input::placeholder,
+        html[data-theme="dark"] textarea::placeholder {
+            color: var(--theme-muted) !important;
+        }
+
+        html[data-theme="dark"] .table {
+            --bs-table-color: var(--theme-text);
+            --bs-table-bg: var(--theme-card);
+            --bs-table-border-color: var(--theme-border);
+            --bs-table-striped-bg: var(--theme-surface);
+            --bs-table-striped-color: var(--theme-text);
+        }
+
+        html[data-theme="dark"] .progress {
+            background-color: #263449;
+        }
+
+        html[data-theme="dark"] a:not(.btn):not(.nav-link):not(.navbar-brand) {
+            color: #60a5fa;
+        }
+
+        html[data-theme="dark"] .bg-soft-primary {
+            background: rgba(59,130,246,.18) !important;
+            color: #93c5fd !important;
+        }
+        html[data-theme="dark"] .bg-soft-success {
+            background: rgba(34,197,94,.18) !important;
+            color: #86efac !important;
+        }
+        html[data-theme="dark"] .bg-soft-warning {
+            background: rgba(249,115,22,.18) !important;
+            color: #fdba74 !important;
+        }
+        html[data-theme="dark"] .bg-soft-danger {
+            background: rgba(239,68,68,.18) !important;
+            color: #fca5a5 !important;
+        }
+
+
+
+        /* Нижняя навигация показывается только на мобильных устройствах. */
+        .mobile-bottom-nav {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: calc(86px + env(safe-area-inset-bottom));
+            }
+
+            .app-navbar {
+                margin-bottom: 18px !important;
+                min-height: 62px;
+            }
+
+            /* У авторизованного пользователя мобильная навигация уже находится снизу. */
+            .authenticated-navbar .navbar-toggler,
+            .authenticated-navbar .navbar-collapse {
+                display: none !important;
+            }
+
+            .authenticated-navbar .container {
+                justify-content: flex-start;
+            }
+
+            .authenticated-navbar .navbar-brand {
+                margin-right: 0;
+            }
+
+            html[data-theme="dark"] .bg-white {
+                background-color: var(--theme-surface) !important;
+                color: var(--theme-text) !important;
+            }
+
+            .mobile-bottom-nav {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 1050;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                height: calc(72px + env(safe-area-inset-bottom));
+                padding: 7px 8px env(safe-area-inset-bottom);
+                background: var(--theme-card);
+                border-top: 1px solid var(--theme-border);
+                box-shadow: 0 -10px 26px rgba(15, 23, 42, 0.08);
+            }
+
+            html[data-theme="dark"] .mobile-bottom-nav {
+                box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.34);
+            }
+
+            .mobile-nav-item {
+                width: 62px;
+                min-height: 56px;
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                color: var(--theme-muted) !important;
+                text-decoration: none;
+                border: 0;
+                background: transparent;
+                border-radius: 14px;
+                padding: 4px;
+                font-size: 11px;
+                font-weight: 600;
+                transition: color .18s ease, background .18s ease;
+            }
+
+            .mobile-nav-item:hover,
+            .mobile-nav-item.active {
+                color: #2563eb !important;
+                background: rgba(37, 99, 235, 0.09);
+            }
+
+            html[data-theme="dark"] .mobile-nav-item:hover,
+            html[data-theme="dark"] .mobile-nav-item.active {
+                color: #60a5fa !important;
+                background: rgba(59, 130, 246, 0.13);
+            }
+
+            .mobile-nav-icon {
+                width: 23px;
+                height: 23px;
+                display: block;
+            }
+
+            .mobile-nav-add {
+                position: relative;
+                top: -19px;
+                width: 60px;
+                height: 60px;
+                min-height: 60px;
+                padding: 0;
+                gap: 0;
+                border-radius: 21px;
+                color: #ffffff !important;
+                background: linear-gradient(135deg, #2563eb, #4f46e5);
+                box-shadow: 0 8px 19px rgba(37, 99, 235, 0.38);
+            }
+
+            .mobile-nav-add:hover,
+            .mobile-nav-add.active {
+                color: #ffffff !important;
+                background: linear-gradient(135deg, #1d4ed8, #4338ca);
+            }
+
+            .mobile-nav-add .mobile-nav-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .mobile-nav-add-label {
+                position: absolute;
+                top: 64px;
+                font-size: 11px;
+                color: var(--theme-muted);
+                white-space: nowrap;
+            }
+        }
+
+        /* Плавная смена темы включается только после нажатия кнопки. */
+        html.theme-transition body,
+        html.theme-transition .app-navbar,
+        html.theme-transition .app-card,
+        html.theme-transition .metric-card,
+        html.theme-transition .card,
+        html.theme-transition .card-body,
+        html.theme-transition .section-card,
+        html.theme-transition .meal-card,
+        html.theme-transition .profile-card,
+        html.theme-transition .profile-mini-card,
+        html.theme-transition .water-mini-card,
+        html.theme-transition .mini-card,
+        html.theme-transition .macro-ring-card,
+        html.theme-transition .mobile-analytics-toggle,
+        html.theme-transition .status-box,
+        html.theme-transition .bmi-scale-item,
+        html.theme-transition .list-group-item,
+        html.theme-transition details,
+        html.theme-transition input,
+        html.theme-transition select,
+        html.theme-transition textarea,
+        html.theme-transition .form-control,
+        html.theme-transition .form-select,
+        html.theme-transition .btn,
+        html.theme-transition .theme-toggle,
+        html.theme-transition .progress,
+        html.theme-transition .soft-badge,
+        html.theme-transition .metric-badge,
+        html.theme-transition .recommendation-list li {
+            transition:
+                background-color 0.34s ease,
+                background 0.34s ease,
+                color 0.24s ease,
+                border-color 0.34s ease,
+                box-shadow 0.34s ease !important;
+        }
+
+        html.theme-transition .macro-ring::before,
+        html.theme-transition .macro-ring::after {
+            transition: background 0.34s ease !important;
+        }
+
+        html.theme-transition .profile-title,
+        html.theme-transition .profile-subtitle,
+        html.theme-transition .section-title,
+        html.theme-transition .profile-mini-label,
+        html.theme-transition .profile-mini-value,
+        html.theme-transition .status-label,
+        html.theme-transition .status-value,
+        html.theme-transition .macro-title,
+        html.theme-transition .macro-value,
+        html.theme-transition .macro-target,
+        html.theme-transition .meal-product-name,
+        html.theme-transition .meal-product-amount,
+        html.theme-transition .text-muted,
+        html.theme-transition label,
+        html.theme-transition h1,
+        html.theme-transition h2,
+        html.theme-transition h3,
+        html.theme-transition p,
+        html.theme-transition strong,
+        html.theme-transition a {
+            transition: color 0.24s ease !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html.theme-transition *,
+            html.theme-transition *::before,
+            html.theme-transition *::after {
+                transition: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle {
+                margin: 10px 0 4px;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg app-navbar mb-4">
+<nav class="navbar navbar-expand-lg app-navbar mb-4 {% if user.is_authenticated %}authenticated-navbar{% endif %}">
     <div class="container">
         <a class="navbar-brand app-brand" href="{% url 'home' %}">Nutrition App</a>
 
@@ -298,6 +640,11 @@
                     <a class="nav-link" href="{% url 'login' %}">Вход</a>
                     <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
                 {% endif %}
+
+                <button type="button" class="theme-toggle" id="themeToggle" data-theme-toggle>
+                    <span id="themeToggleIcon" aria-hidden="true">🌙</span>
+                    <span class="d-lg-none" id="themeToggleLabel">Тёмная тема</span>
+                </button>
             </div>
         </div>
     </div>
@@ -307,7 +654,171 @@
     {% block content %}{% endblock %}
 </main>
 
+{% if user.is_authenticated %}
+<nav class="mobile-bottom-nav" aria-label="Основная мобильная навигация">
+    <a href="{% url 'meals' %}"
+       class="mobile-nav-item {% if request.resolver_match.url_name == 'meals' %}active{% endif %}">
+        <svg class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 11 12 3l9 8"></path>
+            <path d="M5 10v10h14V10"></path>
+            <path d="M9 20v-6h6v6"></path>
+        </svg>
+        <span>Рацион</span>
+    </a>
+
+    <a href="{% url 'progress' %}"
+       class="mobile-nav-item {% if request.resolver_match.url_name == 'progress' %}active{% endif %}">
+        <svg class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19V9"></path>
+            <path d="M10 19V5"></path>
+            <path d="M16 19v-8"></path>
+            <path d="M22 19H2"></path>
+        </svg>
+        <span>Прогресс</span>
+    </a>
+
+    <a href="{% url 'add_meal' %}"
+       class="mobile-nav-item mobile-nav-add {% if request.resolver_match.url_name == 'add_meal' %}active{% endif %}"
+       aria-label="Добавить запись питания">
+        <svg class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+        </svg>
+        <span class="mobile-nav-add-label">Добавить</span>
+    </a>
+
+    <a href="{% url 'profile' %}"
+       class="mobile-nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+        <svg class="mobile-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21c1.4-4.1 4.1-6 8-6s6.6 1.9 8 6"></path>
+        </svg>
+        <span>Профиль</span>
+    </a>
+
+    <button type="button" class="mobile-nav-item theme-toggle-mobile" data-theme-toggle
+            aria-label="Переключить тему">
+        <svg class="mobile-nav-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path>
+        </svg>
+        <svg class="mobile-nav-icon theme-icon-sun d-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v3M12 19v3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"></path>
+        </svg>
+        <span class="theme-mobile-label">Тема</span>
+    </button>
+</nav>
+{% endif %}
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    (function () {
+        const key = "nutrition-theme";
+        const root = document.documentElement;
+        const buttons = document.querySelectorAll("[data-theme-toggle]");
+        const desktopIcon = document.getElementById("themeToggleIcon");
+        const desktopLabel = document.getElementById("themeToggleLabel");
+        const mobileMoon = document.querySelector(".theme-icon-moon");
+        const mobileSun = document.querySelector(".theme-icon-sun");
+        const meta = document.querySelector('meta[name="theme-color"]');
+
+        function setTheme(theme) {
+            const dark = theme === "dark";
+            root.setAttribute("data-theme", theme);
+            localStorage.setItem(key, theme);
+
+            if (desktopIcon) desktopIcon.textContent = dark ? "☀️" : "🌙";
+            if (desktopLabel) desktopLabel.textContent = dark ? "Светлая тема" : "Тёмная тема";
+            if (mobileMoon) mobileMoon.classList.toggle("d-none", dark);
+            if (mobileSun) mobileSun.classList.toggle("d-none", !dark);
+
+            buttons.forEach(function (button) {
+                button.setAttribute("aria-label", dark ? "Включить светлую тему" : "Включить тёмную тему");
+            });
+
+            if (meta) meta.setAttribute("content", dark ? "#0c1424" : "#0d6efd");
+        }
+
+        setTheme(root.getAttribute("data-theme") || "light");
+
+        let transitionTimer;
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                root.classList.add("theme-transition");
+                setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+
+                clearTimeout(transitionTimer);
+                transitionTimer = setTimeout(function () {
+                    root.classList.remove("theme-transition");
+                }, 380);
+            });
+        });
+    })();
+</script>
+
+
+<script>
+    /*
+     * Сохранение положения страницы после действий, которые возвращают
+     * пользователя на тот же экран после ответа Django.
+     * Используется только на элементах с атрибутом data-preserve-scroll.
+     */
+    (function () {
+        const storageKey = "nutrition-scroll-return";
+
+        function rememberScroll() {
+            sessionStorage.setItem(storageKey, JSON.stringify({
+                pathname: window.location.pathname,
+                y: window.scrollY,
+                createdAt: Date.now()
+            }));
+        }
+
+        function restoreScroll() {
+            const rawValue = sessionStorage.getItem(storageKey);
+            if (!rawValue) return;
+
+            let state;
+            try {
+                state = JSON.parse(rawValue);
+            } catch (error) {
+                sessionStorage.removeItem(storageKey);
+                return;
+            }
+
+            const isSamePage = state.pathname === window.location.pathname;
+            const isFresh = Date.now() - state.createdAt < 30000;
+
+            if (isSamePage && isFresh) {
+                window.requestAnimationFrame(function () {
+                    window.scrollTo({
+                        top: state.y,
+                        left: 0,
+                        behavior: "instant"
+                    });
+                    sessionStorage.removeItem(storageKey);
+                });
+            } else {
+                sessionStorage.removeItem(storageKey);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            restoreScroll();
+
+            document.querySelectorAll("[data-preserve-scroll]").forEach(function (element) {
+                if (element.tagName === "FORM") {
+                    element.addEventListener("submit", rememberScroll);
+                } else {
+                    element.addEventListener("click", rememberScroll);
+                }
+            });
+        });
+    })();
+</script>
 
 <script>
     if ("serviceWorker" in navigator) {

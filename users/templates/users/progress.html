@@ -3,6 +3,138 @@
 {% block title %}Прогресс{% endblock %}
 
 {% block content %}
+<style>
+    .progress-mini-card {
+        background: var(--theme-surface);
+        border: 1px solid var(--theme-border);
+        border-radius: 16px;
+        padding: 16px;
+        color: var(--theme-text);
+        transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .progress-mini-card .fw-bold,
+    .progress-mini-card .fw-semibold {
+        color: var(--theme-text);
+    }
+
+    .chart-card {
+        min-height: 100%;
+    }
+
+    html[data-theme="dark"] #weightChart {
+        filter: none;
+    }
+
+    @media (max-width: 768px) {
+        .progress-mini-card {
+            padding: 16px;
+        }
+
+        .chart-card .card-body {
+            padding: 18px !important;
+        }
+    }
+
+    .weight-chart-wrap {
+        position: relative;
+        height: 390px;
+        width: 100%;
+    }
+
+    .mobile-history {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .chart-card .card-body {
+            padding: 18px 14px 14px !important;
+        }
+
+        .chart-card .section-title {
+            padding-left: 4px;
+            margin-bottom: 10px !important;
+        }
+
+        .weight-chart-wrap {
+            height: 300px;
+            margin-left: -2px;
+            margin-right: -2px;
+            width: calc(100% + 4px);
+        }
+
+        .desktop-history {
+            display: none;
+        }
+
+        .mobile-history {
+            display: block;
+            background: var(--theme-card);
+            border: 1px solid var(--theme-border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px var(--theme-shadow);
+            margin-top: 18px;
+        }
+
+        .mobile-history summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--theme-text);
+            font-weight: 700;
+        }
+
+        .mobile-history summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-history summary::after {
+            content: "⌄";
+            color: var(--theme-muted);
+            font-size: 18px;
+            transition: transform .18s ease;
+        }
+
+        .mobile-history[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .mobile-history-count {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--theme-muted);
+            margin-left: 6px;
+        }
+
+        .mobile-history-body {
+            padding: 0 18px 10px;
+            border-top: 1px solid var(--theme-border);
+        }
+
+        .mobile-history-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--theme-border);
+            font-size: 14px;
+        }
+
+        .mobile-history-item:last-child {
+            border-bottom: 0;
+        }
+
+        .mobile-history-item strong {
+            white-space: nowrap;
+        }
+    }
+
+</style>
+
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h1 class="h2 fw-bold mb-1">Прогресс пользователя</h1>
@@ -16,15 +148,15 @@
             <div class="card-body p-4">
                 <div class="section-title">Текущие параметры</div>
                 <div class="d-flex flex-column gap-3">
-                    <div class="border rounded-4 p-3 bg-white">
+                    <div class="progress-mini-card">
                         <div class="text-muted small">Текущий вес</div>
                         <div class="fw-bold fs-4">{{ profile.current_weight }} кг</div>
                     </div>
-                    <div class="border rounded-4 p-3 bg-white">
+                    <div class="progress-mini-card">
                         <div class="text-muted small">Целевой вес</div>
                         <div class="fw-bold fs-4">{{ profile.target_weight }} кг</div>
                     </div>
-                    <div class="border rounded-4 p-3 bg-white">
+                    <div class="progress-mini-card">
                         <div class="text-muted small">Цель</div>
                         <div class="fw-semibold">{{ profile.get_goal_display }}</div>
                     </div>
@@ -36,7 +168,7 @@
             <div class="card-body p-4">
                 <div class="section-title">Добавить новый вес</div>
 
-                <form method="post">
+                <form method="post" data-preserve-scroll>
                     {% csrf_token %}
 
                     <div class="mb-3">
@@ -56,16 +188,18 @@
     </div>
 
     <div class="col-lg-8">
-        <div class="card app-card">
+        <div class="card app-card chart-card">
             <div class="card-body p-4">
                 <div class="section-title">График изменения веса</div>
-                <canvas id="weightChart" height="120"></canvas>
+                <div class="weight-chart-wrap">
+                    <canvas id="weightChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card app-card mt-4">
+<div class="card app-card mt-4 desktop-history">
     <div class="card-body p-4">
         <div class="section-title">История веса</div>
 
@@ -84,6 +218,28 @@
     </div>
 </div>
 
+<details class="mobile-history">
+    <summary>
+        <span>
+            История записей
+            <span class="mobile-history-count">{{ weight_entries|length }} знач.</span>
+        </span>
+    </summary>
+
+    <div class="mobile-history-body">
+        {% if weight_entries %}
+            {% for entry in weight_entries %}
+                <div class="mobile-history-item">
+                    <span>{{ entry.date }}</span>
+                    <strong>{{ entry.weight }} кг</strong>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted mb-0 py-3">Записей по весу пока нет.</p>
+        {% endif %}
+    </div>
+</details>
+
 {{ labels|json_script:"weight-labels" }}
 {{ weights|json_script:"weight-values" }}
 
@@ -91,34 +247,136 @@
 <script>
     const labels = JSON.parse(document.getElementById('weight-labels').textContent);
     const weights = JSON.parse(document.getElementById('weight-values').textContent);
-
     const ctx = document.getElementById('weightChart').getContext('2d');
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    new Chart(ctx, {
+    function getChartTheme() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        return {
+            text: isDark ? '#94a3b8' : '#64748b',
+            grid: isDark ? 'rgba(148, 163, 184, 0.10)' : 'rgba(100, 116, 139, 0.11)',
+            line: isDark ? '#6ea8ff' : '#2563eb',
+            point: isDark ? '#9cc4ff' : '#2563eb',
+            fillTop: isDark ? 'rgba(96, 165, 250, 0.22)' : 'rgba(37, 99, 235, 0.16)',
+            fillBottom: isDark ? 'rgba(96, 165, 250, 0.00)' : 'rgba(37, 99, 235, 0.01)'
+        };
+    }
+
+    function chartGradient(theme) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, isMobile ? 290 : 390);
+        gradient.addColorStop(0, theme.fillTop);
+        gradient.addColorStop(1, theme.fillBottom);
+        return gradient;
+    }
+
+    const currentTheme = getChartTheme();
+
+    const weightChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
             datasets: [{
                 label: 'Вес, кг',
                 data: weights,
-                borderWidth: 3,
-                tension: 0.35,
-                fill: false
+                borderColor: currentTheme.line,
+                backgroundColor: chartGradient(currentTheme),
+                pointBackgroundColor: currentTheme.point,
+                pointBorderColor: currentTheme.line,
+                pointBorderWidth: 2,
+                borderWidth: isMobile ? 3 : 3,
+                pointRadius: isMobile ? 5 : 4,
+                pointHoverRadius: 6,
+                tension: 0.36,
+                fill: true
             }]
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: isMobile ? 4 : 8,
+                    right: isMobile ? 8 : 14,
+                    bottom: isMobile ? 3 : 4,
+                    left: isMobile ? 2 : 6
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
             plugins: {
                 legend: {
-                    display: true
+                    display: !isMobile,
+                    labels: {
+                        color: currentTheme.text,
+                        usePointStyle: true,
+                        boxWidth: 10
+                    }
+                },
+                tooltip: {
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Вес: ' + context.parsed.y + ' кг';
+                        }
+                    }
                 }
             },
             scales: {
+                x: {
+                    ticks: {
+                        color: currentTheme.text,
+                        maxRotation: isMobile ? 32 : 0,
+                        minRotation: isMobile ? 32 : 0,
+                        autoSkip: true,
+                        maxTicksLimit: isMobile ? 5 : 8,
+                        font: { size: isMobile ? 11 : 12 }
+                    },
+                    grid: {
+                        display: false
+                    },
+                    border: {
+                        color: currentTheme.grid
+                    }
+                },
                 y: {
-                    beginAtZero: false
+                    beginAtZero: false,
+                    grace: '12%',
+                    ticks: {
+                        color: currentTheme.text,
+                        maxTicksLimit: isMobile ? 5 : 7,
+                        font: { size: isMobile ? 11 : 12 }
+                    },
+                    grid: {
+                        color: currentTheme.grid
+                    },
+                    border: {
+                        display: false
+                    }
                 }
             }
         }
     });
+
+    function updateChartTheme() {
+        const theme = getChartTheme();
+        weightChart.data.datasets[0].borderColor = theme.line;
+        weightChart.data.datasets[0].backgroundColor = chartGradient(theme);
+        weightChart.data.datasets[0].pointBackgroundColor = theme.point;
+        weightChart.data.datasets[0].pointBorderColor = theme.line;
+        weightChart.options.plugins.legend.labels.color = theme.text;
+        weightChart.options.scales.x.ticks.color = theme.text;
+        weightChart.options.scales.y.ticks.color = theme.text;
+        weightChart.options.scales.x.border.color = theme.grid;
+        weightChart.options.scales.y.grid.color = theme.grid;
+        weightChart.update();
+    }
+
+    new MutationObserver(updateChartTheme).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
 </script>
+
 {% endblock %}

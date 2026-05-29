@@ -5,11 +5,11 @@
 {% block content %}
 <style>
     .form-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 22px;
         padding: 28px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-        border: none;
+        box-shadow: 0 10px 30px var(--theme-shadow);
+        border: 1px solid var(--theme-border);
         max-width: 720px;
         margin: 0 auto;
     }
@@ -17,18 +17,18 @@
     .form-title {
         font-size: 28px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         margin-bottom: 6px;
     }
 
     .form-subtitle {
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 26px;
     }
 
     .form-label {
         font-weight: 700;
-        color: #374151;
+        color: var(--theme-text);
         margin-bottom: 8px;
     }
 
@@ -37,6 +37,26 @@
         gap: 10px;
         flex-wrap: wrap;
         margin-top: 24px;
+    }
+
+
+    .form-control,
+    .form-select,
+    input,
+    select,
+    textarea {
+        border-radius: 12px;
+        min-height: 46px;
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary {
+        color: var(--theme-muted);
+        border-color: var(--theme-border);
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary:hover {
+        color: #ffffff;
+        background: #334155;
     }
 
     @media (max-width: 768px) {

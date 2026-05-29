@@ -33,17 +33,17 @@
     }
 
     .section-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 22px;
         padding: 28px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 10px 30px var(--theme-shadow);
         border: none;
     }
 
     .section-title {
         font-size: 20px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         margin-bottom: 16px;
     }
 
@@ -65,10 +65,10 @@
 
     .macro-ring-card {
         position: relative;
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 22px;
         padding: 24px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 10px 30px var(--theme-shadow);
         height: 100%;
         text-align: center;
         overflow: hidden;
@@ -94,7 +94,7 @@
             conic-gradient(
                 from 270deg,
                 var(--ring-color) calc(var(--progress) * 1.8deg),
-                #e5e7eb 0deg 180deg,
+                var(--theme-border) 0deg 180deg,
                 transparent 180deg 360deg
             );
     }
@@ -107,7 +107,7 @@
         left: 18px;
         top: 18px;
         border-radius: 50%;
-        background: #ffffff;
+        background: var(--theme-card);
     }
 
     .macro-percent {
@@ -118,26 +118,26 @@
         z-index: 2;
         font-size: 13px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
     }
 
     .macro-title {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 8px;
     }
 
     .macro-value {
         font-size: 38px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         line-height: 1;
         margin-bottom: 10px;
     }
 
     .macro-target {
         font-size: 13px;
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 12px;
         min-height: 20px;
     }
@@ -159,29 +159,29 @@
     }
 
     .mini-card {
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--theme-border);
         border-radius: 16px;
         padding: 18px 20px;
         height: 100%;
-        background: #ffffff;
+        background: var(--theme-card);
     }
 
     .mini-card .label {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--theme-muted);
         margin-bottom: 6px;
     }
 
     .mini-card .value {
         font-size: 20px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
     }
 
     .progress-custom {
         height: 18px;
         border-radius: 999px;
-        background: #e5e7eb;
+        background: var(--theme-border);
         overflow: hidden;
     }
 
@@ -197,7 +197,7 @@
     }
 
     .recommendation-list li {
-        background: #f8fafc;
+        background: var(--theme-surface);
         border-radius: 14px;
         padding: 14px 16px;
     }
@@ -207,10 +207,10 @@
     }
 
     .meal-card {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 20px;
         padding: 24px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 10px 30px var(--theme-shadow);
         border: none;
         height: 100%;
     }
@@ -227,12 +227,12 @@
 
     .meal-product-name {
         font-weight: 700;
-        color: #111827;
+        color: var(--theme-text);
     }
 
     .meal-product-amount {
         font-size: 14px;
-        color: #6b7280;
+        color: var(--theme-muted);
     }
 
     .action-toolbar {
@@ -245,7 +245,7 @@
         display: none;
         margin-top: 14px;
         padding-top: 14px;
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid var(--theme-border);
     }
 
     .action-panel.active {
@@ -255,7 +255,7 @@
     .action-panel-title {
         font-size: 14px;
         font-weight: 700;
-        color: #374151;
+        color: var(--theme-text);
         margin-bottom: 10px;
     }
 
@@ -300,9 +300,9 @@
     }
 
     .mobile-analytics-toggle {
-        background: #ffffff;
+        background: var(--theme-card);
         border-radius: 18px;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 10px 30px var(--theme-shadow);
         padding: 0;
         overflow: hidden;
         margin-bottom: 24px;
@@ -314,7 +314,7 @@
         padding: 18px 20px;
         font-size: 18px;
         font-weight: 800;
-        color: #111827;
+        color: var(--theme-text);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -326,7 +326,7 @@
 
     .mobile-analytics-content {
         padding: 0 20px 20px 20px;
-        border-top: 1px solid #eef2f7;
+        border-top: 1px solid var(--theme-border);
     }
 
     .mobile-inline-buttons {
@@ -337,6 +337,338 @@
 
     .mobile-inline-buttons .btn-wide {
         grid-column: 1 / -1;
+    }
+
+
+    html[data-theme="dark"] .metric-badge.blue {
+        background: rgba(59, 130, 246, 0.18);
+        color: #93c5fd;
+    }
+
+    html[data-theme="dark"] .metric-badge.green {
+        background: rgba(34, 197, 94, 0.18);
+        color: #86efac;
+    }
+
+    html[data-theme="dark"] .metric-badge.orange {
+        background: rgba(249, 115, 22, 0.18);
+        color: #fdba74;
+    }
+
+    html[data-theme="dark"] .metric-badge.red {
+        background: rgba(239, 68, 68, 0.18);
+        color: #fca5a5;
+    }
+
+    html[data-theme="dark"] .action-link.edit {
+        background: rgba(59, 130, 246, 0.12);
+        border-color: rgba(96, 165, 250, 0.34);
+        color: #93c5fd;
+    }
+
+    html[data-theme="dark"] .action-link.delete {
+        background: rgba(239, 68, 68, 0.12);
+        border-color: rgba(252, 165, 165, 0.30);
+        color: #fca5a5;
+    }
+
+    html[data-theme="dark"] .btn-outline-dark {
+        color: var(--theme-text);
+        border-color: var(--theme-border);
+    }
+
+    html[data-theme="dark"] .btn-outline-dark:hover {
+        color: #ffffff;
+        background: #334155;
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary {
+        color: var(--theme-muted);
+        border-color: var(--theme-border);
+    }
+
+    html[data-theme="dark"] .btn-outline-secondary:hover {
+        color: #ffffff;
+        background: #334155;
+    }
+
+
+    .mobile-only {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .desktop-only,
+        .desktop-add-meal-btn {
+            display: none !important;
+        }
+
+        .mobile-only {
+            display: block;
+        }
+
+        .section-card.mobile-date-filter {
+            padding: 12px;
+            margin-bottom: 14px !important;
+        }
+
+        .mobile-date-filter .date-toolbar {
+            display: grid !important;
+            grid-template-columns: 50px 1fr 50px !important;
+            gap: 8px !important;
+            align-items: center !important;
+        }
+
+        .mobile-date-filter .form-group {
+            grid-column: auto !important;
+            min-width: 0 !important;
+        }
+
+        .mobile-date-filter .form-label,
+        .mobile-date-filter .mobile-hide-date-control {
+            display: none !important;
+        }
+
+        .mobile-date-filter input[type="date"] {
+            height: 44px;
+            min-height: 44px;
+            font-size: .93rem !important;
+            text-align: center;
+            padding-left: 10px;
+            padding-right: 8px;
+        }
+
+        .mobile-date-filter .btn {
+            height: 44px;
+            min-height: 44px;
+            padding: 0;
+            font-size: 1.25rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-page-heading {
+            margin-bottom: 14px !important;
+        }
+
+        .mobile-page-heading h1 {
+            font-size: 1.45rem !important;
+        }
+
+        .mobile-page-heading .text-muted {
+            display: none;
+        }
+
+        .mobile-macro-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .mobile-macro-item {
+            background: var(--theme-card);
+            border: 1px solid var(--theme-border);
+            border-radius: 16px;
+            padding: 12px 12px 10px;
+            box-shadow: 0 8px 22px var(--theme-shadow);
+        }
+
+        .mobile-macro-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 7px;
+        }
+
+        .mobile-macro-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--theme-muted);
+        }
+
+        .mobile-macro-percent {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--theme-muted);
+        }
+
+        .mobile-macro-number {
+            font-size: 1.38rem;
+            line-height: 1.1;
+            font-weight: 800;
+            color: var(--theme-text);
+            margin-bottom: 7px;
+        }
+
+        .mobile-macro-goal {
+            font-size: 11px;
+            color: var(--theme-muted);
+            margin-bottom: 7px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mobile-macro-bar {
+            height: 6px;
+            border-radius: 999px;
+            background: var(--theme-border);
+            overflow: hidden;
+        }
+
+        .mobile-macro-bar span {
+            display: block;
+            height: 100%;
+            width: var(--bar-width);
+            border-radius: inherit;
+            background: var(--bar-color);
+        }
+
+        .mobile-fold {
+            background: var(--theme-card);
+            border: 1px solid var(--theme-border);
+            border-radius: 17px;
+            box-shadow: 0 8px 22px var(--theme-shadow);
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .mobile-fold summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 15px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            color: var(--theme-text);
+            font-weight: 800;
+        }
+
+        .mobile-fold summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-fold summary::after {
+            content: "⌄";
+            color: var(--theme-muted);
+            font-size: 18px;
+            transition: transform .18s ease;
+        }
+
+        .mobile-fold[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .mobile-fold-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .mobile-fold-caption {
+            font-size: 12px;
+            color: var(--theme-muted);
+            font-weight: 500;
+        }
+
+        .mobile-fold-body {
+            border-top: 1px solid var(--theme-border);
+            padding: 12px 16px 16px;
+        }
+
+        .mobile-meal-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-meal-list li {
+            padding: 9px 0;
+            border-bottom: 1px solid var(--theme-border);
+        }
+
+        .mobile-meal-list li:last-child {
+            border-bottom: 0;
+        }
+
+        .mobile-meal-row {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .mobile-entry-actions {
+            display: flex;
+            gap: 5px;
+            margin-top: 6px;
+        }
+
+        .mobile-entry-actions .btn {
+            min-height: 30px;
+            font-size: 12px;
+            padding: 4px 9px;
+        }
+
+        .mobile-analysis-values,
+        .mobile-water-values {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .mobile-stat {
+            background: var(--theme-surface);
+            border: 1px solid var(--theme-border);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .mobile-stat-label {
+            font-size: 11px;
+            color: var(--theme-muted);
+            margin-bottom: 4px;
+        }
+
+        .mobile-stat-value {
+            font-size: 15px;
+            color: var(--theme-text);
+            font-weight: 800;
+        }
+
+        .mobile-water-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .mobile-water-actions .btn {
+            min-height: 40px;
+            font-size: 14px;
+        }
+
+        .mobile-recommendations {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-recommendations li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--theme-border);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .mobile-recommendations li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
     }
 
     @media (max-width: 768px) {
@@ -377,22 +709,133 @@
             padding: 16px;
         }
     }
+
+    @media (max-width: 768px) {
+        .mobile-page-heading {
+            margin-bottom: 12px !important;
+        }
+
+        .mobile-page-heading h1 {
+            font-size: 1.45rem !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .mobile-date-filter {
+            padding: 10px 12px !important;
+            border-radius: 18px !important;
+            margin-bottom: 14px !important;
+        }
+
+        .mobile-date-filter .date-toolbar {
+            display: grid !important;
+            grid-template-columns: 46px minmax(0, 1fr) 46px !important;
+            gap: 10px !important;
+            align-items: center !important;
+        }
+
+        .mobile-date-filter .date-toolbar .btn {
+            width: 46px !important;
+            min-width: 46px !important;
+            height: 46px !important;
+            min-height: 46px !important;
+            padding: 0 !important;
+            border-radius: 14px !important;
+            line-height: 1 !important;
+        }
+
+        .mobile-date-filter .form-group {
+            width: 100%;
+            grid-column: auto !important;
+        }
+
+        .mobile-date-filter input[type="date"] {
+            width: 100%;
+            height: 46px;
+            min-height: 46px;
+            padding: 0 12px;
+            text-align: center;
+            border-radius: 14px !important;
+        }
+
+        .desktop-date-label {
+            display: none;
+        }
+
+        .mobile-date-icon {
+            display: inline-flex;
+            width: 20px;
+            height: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-date-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .mobile-summary-first {
+            margin-bottom: 12px;
+        }
+
+        .mobile-summary-first .mobile-fold {
+            margin-bottom: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), var(--theme-card));
+        }
+
+        .mobile-summary-first .mobile-fold summary {
+            padding: 14px 16px;
+        }
+
+        .mobile-macro-grid {
+            gap: 9px;
+            margin-bottom: 12px;
+        }
+
+        .mobile-macro-item {
+            padding: 11px 12px 10px;
+            border-radius: 15px;
+        }
+
+        .mobile-fold {
+            margin-bottom: 10px;
+        }
+
+        .mobile-fold summary {
+            padding: 14px 16px;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .mobile-date-icon {
+            display: none;
+        }
+    }
+
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 mobile-page-heading">
     <div>
         <h1 class="h2 fw-bold mb-1">Рацион за {{ selected_date|date:"j E Y" }}</h1>
         <p class="text-muted mb-0">Сводка по питанию, БЖУ и персонализированным рекомендациям</p>
     </div>
 
-    <a href="{% url 'add_meal' %}?date={{ selected_date_str }}" class="btn btn-primary">
+    <a href="{% url 'add_meal' %}?date={{ selected_date_str }}" class="btn btn-primary desktop-add-meal-btn">
         Добавить запись
     </a>
 </div>
 
-<div class="section-card mb-4">
+<div class="section-card mb-4 mobile-date-filter">
     <form method="get" class="date-toolbar">
-        <a href="?date={{ previous_date_str }}" class="btn btn-outline-secondary">← Назад</a>
+        <a href="?date={{ previous_date_str }}" class="btn btn-outline-secondary" aria-label="Предыдущий день">
+            <span class="desktop-date-label">← Назад</span>
+            <span class="mobile-date-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"></path>
+                </svg>
+            </span>
+        </a>
 
         <div class="form-group">
             <label for="date" class="form-label fw-semibold">Дата:</label>
@@ -402,12 +845,20 @@
                 name="date"
                 value="{{ selected_date_str }}"
                 class="form-control"
+                onchange="this.form.submit()"
             >
         </div>
 
-        <button type="submit" class="btn btn-primary">Показать</button>
-        <a href="{% url 'meals' %}" class="btn btn-outline-dark">Сегодня</a>
-        <a href="?date={{ next_date_str }}" class="btn btn-outline-secondary">Вперёд →</a>
+        <button type="submit" class="btn btn-primary mobile-hide-date-control">Показать</button>
+        <a href="{% url 'meals' %}" class="btn btn-outline-dark mobile-hide-date-control">Сегодня</a>
+        <a href="?date={{ next_date_str }}" class="btn btn-outline-secondary" aria-label="Следующий день">
+            <span class="desktop-date-label">Вперёд →</span>
+            <span class="mobile-date-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"></path>
+                </svg>
+            </span>
+        </a>
     </form>
 </div>
 
@@ -469,64 +920,83 @@
     </div>
 </div>
 
-<div class="d-block d-md-none">
-    <div class="macro-ring-card mb-4">
-        <div class="macro-ring macro-ring-blue" style="--progress: {{ calories_percent }};"></div>
-        <div class="macro-percent">{{ calories_percent }}%</div>
-
-        <div class="macro-title">Калории</div>
-        <div class="macro-value">{{ total_calories|floatformat:1 }}</div>
-        <div class="macro-target">цель: {{ target_calories|floatformat:1 }}</div>
-        <span class="metric-badge blue">ккал</span>
-    </div>
-
-    <details class="mobile-analytics-toggle">
+<div class="mobile-only mobile-summary-first">
+    <details class="mobile-fold">
         <summary>
-            <span>Показать БЖУ</span>
-            <span>▾</span>
+            <span class="mobile-fold-summary">
+                <span>Анализ рациона</span>
+                <span class="mobile-fold-caption">{{ total_calories }} из {{ target_calories }} ккал</span>
+            </span>
         </summary>
-
-        <div class="mobile-analytics-content">
-            <div class="macro-ring-card mb-3">
-                <div class="macro-ring macro-ring-green" style="--progress: {{ proteins_percent }};"></div>
-                <div class="macro-percent">{{ proteins_percent }}%</div>
-
-                <div class="macro-title">Белки</div>
-                <div class="macro-value">{{ total_proteins|floatformat:2 }}</div>
-                <div class="macro-target">
-                    цель: {{ target_proteins|floatformat:2 }} г · осталось: {{ remaining_proteins|floatformat:2 }} г
+        <div class="mobile-fold-body">
+            <div class="mobile-analysis-values">
+                <div class="mobile-stat">
+                    <div class="mobile-stat-label">Рекомендуется</div>
+                    <div class="mobile-stat-value">{{ target_calories }} ккал</div>
                 </div>
-                <span class="metric-badge green">грамм</span>
-            </div>
-
-            <div class="macro-ring-card mb-3">
-                <div class="macro-ring macro-ring-orange" style="--progress: {{ fats_percent }};"></div>
-                <div class="macro-percent">{{ fats_percent }}%</div>
-
-                <div class="macro-title">Жиры</div>
-                <div class="macro-value">{{ total_fats|floatformat:2 }}</div>
-                <div class="macro-target">
-                    цель: {{ target_fats|floatformat:2 }} г · осталось: {{ remaining_fats|floatformat:2 }} г
+                <div class="mobile-stat">
+                    <div class="mobile-stat-label">Фактически</div>
+                    <div class="mobile-stat-value">{{ total_calories }} ккал</div>
                 </div>
-                <span class="metric-badge orange">грамм</span>
-            </div>
-
-            <div class="macro-ring-card">
-                <div class="macro-ring macro-ring-red" style="--progress: {{ carbs_percent }};"></div>
-                <div class="macro-percent">{{ carbs_percent }}%</div>
-
-                <div class="macro-title">Углеводы</div>
-                <div class="macro-value">{{ total_carbs|floatformat:2 }}</div>
-                <div class="macro-target">
-                    цель: {{ target_carbs|floatformat:2 }} г · осталось: {{ remaining_carbs|floatformat:2 }} г
-                </div>
-                <span class="metric-badge red">грамм</span>
             </div>
         </div>
     </details>
 </div>
 
-<div class="section-card mb-4">
+
+<div class="mobile-only">
+    <div class="mobile-macro-grid">
+        <div class="mobile-macro-item">
+            <div class="mobile-macro-top">
+                <span class="mobile-macro-name">Калории</span>
+                <span class="mobile-macro-percent">{{ calories_percent }}%</span>
+            </div>
+            <div class="mobile-macro-number">{{ total_calories|floatformat:1 }}</div>
+            <div class="mobile-macro-goal">Цель: {{ target_calories|floatformat:1 }} ккал</div>
+            <div class="mobile-macro-bar" style="--bar-width: {{ calories_percent }}%; --bar-color: #3b82f6;">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mobile-macro-item">
+            <div class="mobile-macro-top">
+                <span class="mobile-macro-name">Белки</span>
+                <span class="mobile-macro-percent">{{ proteins_percent }}%</span>
+            </div>
+            <div class="mobile-macro-number">{{ total_proteins|floatformat:2 }} г</div>
+            <div class="mobile-macro-goal">Цель: {{ target_proteins|floatformat:2 }} г</div>
+            <div class="mobile-macro-bar" style="--bar-width: {{ proteins_percent }}%; --bar-color: #22c55e;">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mobile-macro-item">
+            <div class="mobile-macro-top">
+                <span class="mobile-macro-name">Жиры</span>
+                <span class="mobile-macro-percent">{{ fats_percent }}%</span>
+            </div>
+            <div class="mobile-macro-number">{{ total_fats|floatformat:2 }} г</div>
+            <div class="mobile-macro-goal">Цель: {{ target_fats|floatformat:2 }} г</div>
+            <div class="mobile-macro-bar" style="--bar-width: {{ fats_percent }}%; --bar-color: #f97316;">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="mobile-macro-item">
+            <div class="mobile-macro-top">
+                <span class="mobile-macro-name">Углеводы</span>
+                <span class="mobile-macro-percent">{{ carbs_percent }}%</span>
+            </div>
+            <div class="mobile-macro-number">{{ total_carbs|floatformat:2 }} г</div>
+            <div class="mobile-macro-goal">Цель: {{ target_carbs|floatformat:2 }} г</div>
+            <div class="mobile-macro-bar" style="--bar-width: {{ carbs_percent }}%; --bar-color: #ef4444;">
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-card mb-4 desktop-only">
     <div class="section-title">Анализ рациона</div>
 
     <div class="row g-3">
@@ -546,7 +1016,7 @@
     </div>
 </div>
 
-<div class="section-card mb-4">
+<div class="section-card mb-4 desktop-only">
     <div class="row g-4">
         <div class="col-md-6 col-xl-3">
             <div class="meal-card">
@@ -750,7 +1220,122 @@
     </div>
 </div>
 
-<div class="section-card mb-4">
+
+<div class="mobile-only">
+    <details class="mobile-fold">
+        <summary>
+            <span class="mobile-fold-summary">
+                <span>Завтрак</span>
+                <span class="mobile-fold-caption">{% if breakfast_entries %}Записи добавлены{% else %}Нет записей{% endif %}</span>
+            </span>
+        </summary>
+        <div class="mobile-fold-body">
+            {% if breakfast_entries %}
+                <ul class="mobile-meal-list">
+                    {% for entry in breakfast_entries %}
+                        <li>
+                            <div class="mobile-meal-row">
+                                <div>
+                                    <div class="meal-product-name">{{ entry.product.name }}</div>
+                                    <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                                </div>
+                            </div>
+                            <div class="mobile-entry-actions">
+                                <a href="{% url 'edit_meal' entry.id %}" class="btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'delete_meal' entry.id %}" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted mb-0">Нет записей.</p>
+            {% endif %}
+        </div>
+    </details>
+
+    <details class="mobile-fold">
+        <summary>
+            <span class="mobile-fold-summary">
+                <span>Обед</span>
+                <span class="mobile-fold-caption">{% if lunch_entries %}Записи добавлены{% else %}Нет записей{% endif %}</span>
+            </span>
+        </summary>
+        <div class="mobile-fold-body">
+            {% if lunch_entries %}
+                <ul class="mobile-meal-list">
+                    {% for entry in lunch_entries %}
+                        <li>
+                            <div class="meal-product-name">{{ entry.product.name }}</div>
+                            <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            <div class="mobile-entry-actions">
+                                <a href="{% url 'edit_meal' entry.id %}" class="btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'delete_meal' entry.id %}" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted mb-0">Нет записей.</p>
+            {% endif %}
+        </div>
+    </details>
+
+    <details class="mobile-fold">
+        <summary>
+            <span class="mobile-fold-summary">
+                <span>Ужин</span>
+                <span class="mobile-fold-caption">{% if dinner_entries %}Записи добавлены{% else %}Нет записей{% endif %}</span>
+            </span>
+        </summary>
+        <div class="mobile-fold-body">
+            {% if dinner_entries %}
+                <ul class="mobile-meal-list">
+                    {% for entry in dinner_entries %}
+                        <li>
+                            <div class="meal-product-name">{{ entry.product.name }}</div>
+                            <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            <div class="mobile-entry-actions">
+                                <a href="{% url 'edit_meal' entry.id %}" class="btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'delete_meal' entry.id %}" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted mb-0">Нет записей.</p>
+            {% endif %}
+        </div>
+    </details>
+
+    <details class="mobile-fold">
+        <summary>
+            <span class="mobile-fold-summary">
+                <span>Перекусы</span>
+                <span class="mobile-fold-caption">{% if snack_entries %}Записи добавлены{% else %}Нет записей{% endif %}</span>
+            </span>
+        </summary>
+        <div class="mobile-fold-body">
+            {% if snack_entries %}
+                <ul class="mobile-meal-list">
+                    {% for entry in snack_entries %}
+                        <li>
+                            <div class="meal-product-name">{{ entry.product.name }}</div>
+                            <div class="meal-product-amount">{{ entry.amount_grams }} г</div>
+                            <div class="mobile-entry-actions">
+                                <a href="{% url 'edit_meal' entry.id %}" class="btn btn-outline-primary">Изменить</a>
+                                <a href="{% url 'delete_meal' entry.id %}" class="btn btn-outline-danger">Удалить</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted mb-0">Нет записей.</p>
+            {% endif %}
+        </div>
+    </details>
+</div>
+
+<div class="section-card mb-4 desktop-only">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
         <div>
             <h3 class="mb-1 fw-bold">Водный баланс</h3>
@@ -760,18 +1345,18 @@
 
         <div class="d-none d-md-flex align-items-center gap-2 flex-wrap">
             <span class="metric-badge blue">{{ water_percent }}%</span>
-            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" class="btn btn-primary">+ 250 мл</a>
-            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" class="btn btn-outline-primary">+ 500 мл</a>
-            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" class="btn btn-outline-danger">Убрать последний</a>
+            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-primary">+ 250 мл</a>
+            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-primary">+ 500 мл</a>
+            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-danger">Убрать последний</a>
         </div>
     </div>
 
     <div class="d-block d-md-none mb-3">
         <div class="mobile-inline-buttons">
             <div class="metric-badge blue d-flex align-items-center justify-content-center">{{ water_percent }}%</div>
-            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" class="btn btn-primary">+ 250 мл</a>
-            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" class="btn btn-outline-primary btn-wide">+ 500 мл</a>
-            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" class="btn btn-outline-danger btn-wide">Убрать последний</a>
+            <a href="{% url 'add_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-primary">+ 250 мл</a>
+            <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-primary btn-wide">+ 500 мл</a>
+            <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-danger btn-wide">Убрать последний</a>
         </div>
     </div>
 
@@ -841,7 +1426,7 @@
     </div>
 </div>
 
-<div class="section-card mb-4">
+<div class="section-card mb-4 desktop-only">
     <div class="section-title">Персонализированные рекомендации</div>
 
     <ul class="recommendation-list">
@@ -849,6 +1434,51 @@
             <li>{{ recommendation }}</li>
         {% endfor %}
     </ul>
+</div>
+
+
+<div class="mobile-only">
+    <details class="mobile-fold">
+        <summary>
+            <span class="mobile-fold-summary">
+                <span>Водный баланс</span>
+                <span class="mobile-fold-caption">{{ total_water }} из {{ target_water }} мл · {{ water_percent }}%</span>
+            </span>
+        </summary>
+        <div class="mobile-fold-body">
+            <div class="mobile-water-values">
+                <div class="mobile-stat">
+                    <div class="mobile-stat-label">Выпито</div>
+                    <div class="mobile-stat-value">{{ total_water }} мл</div>
+                </div>
+                <div class="mobile-stat">
+                    <div class="mobile-stat-label">Осталось</div>
+                    <div class="mobile-stat-value">{{ remaining_water }} мл</div>
+                </div>
+            </div>
+            <div class="progress progress-custom mt-3">
+                <div class="progress-bar bg-info" style="width: {{ water_percent }}%;">{{ water_percent }}%</div>
+            </div>
+            <div class="mobile-water-actions">
+                <a href="{% url 'add_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-primary">+ 250 мл</a>
+                <a href="{% url 'add_water_500' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-primary">+ 500 мл</a>
+                <a href="{% url 'remove_last_water' %}?date={{ selected_date_str }}" data-preserve-scroll class="btn btn-outline-danger" style="grid-column: 1 / -1;">Убрать последний</a>
+            </div>
+        </div>
+    </details>
+
+    <details class="mobile-fold">
+        <summary>
+            <span>Рекомендации</span>
+        </summary>
+        <div class="mobile-fold-body">
+            <ul class="mobile-recommendations">
+                {% for recommendation in recommendations %}
+                    <li>{{ recommendation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </details>
 </div>
 
 <script>
@@ -868,5 +1498,39 @@
             editPanel.classList.remove("active");
         }
     }
+
+    /*
+     * На телефоне после добавления воды сохраняем раскрытые секции:
+     * пользователь остаётся в том же контексте и не открывает блок заново.
+     */
+    document.addEventListener("DOMContentLoaded", function () {
+        const folds = document.querySelectorAll(".mobile-fold");
+        const foldsKey = "meal-folds-{{ selected_date_str }}";
+
+        if (!folds.length) return;
+
+        const savedState = sessionStorage.getItem(foldsKey);
+        if (savedState) {
+            try {
+                const openIndexes = JSON.parse(savedState);
+                folds.forEach(function (fold, index) {
+                    fold.open = openIndexes.includes(index);
+                });
+            } catch (error) {
+                sessionStorage.removeItem(foldsKey);
+            }
+        }
+
+        folds.forEach(function (fold) {
+            fold.addEventListener("toggle", function () {
+                const openIndexes = Array.from(folds)
+                    .map(function (item, index) { return item.open ? index : null; })
+                    .filter(function (index) { return index !== null; });
+
+                sessionStorage.setItem(foldsKey, JSON.stringify(openIndexes));
+            });
+        });
+    });
+
 </script>
 {% endblock %}

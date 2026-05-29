@@ -90,6 +90,22 @@ def get_selected_date(request):
     return selected_date
 
 
+def find_existing_product_by_name(name):
+    """
+    Ищет продукт с тем же названием без учёта регистра и лишних пробелов.
+    Сравнение выполняется через casefold(), чтобы корректно работать
+    с русскими буквами и на локальной SQLite, и на PostgreSQL в Render.
+    """
+    normalized_name = " ".join(name.split()).casefold()
+
+    for product in Product.objects.only("id", "name"):
+        current_name = " ".join(product.name.split()).casefold()
+        if current_name == normalized_name:
+            return product
+
+    return None
+
+
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -517,14 +533,23 @@ def add_product_view(request):
         form = ProductForm(request.POST)
 
         if form.is_valid():
-            product = form.save(commit=False)
-            product.is_custom = True
-            product.save()
+            product_name = form.cleaned_data["name"]
+            existing_product = find_existing_product_by_name(product_name)
+
+            if existing_product:
+                product = existing_product
+            else:
+                product = form.save(commit=False)
+                product.name = product_name
+                product.is_custom = True
+                product.save()
+
+            redirect_url = f"/add-meal/?product={product.id}"
 
             if selected_date_str:
-                return redirect(f"/add-meal/?product={product.id}&date={selected_date_str}")
+                redirect_url += f"&date={selected_date_str}"
 
-            return redirect(f"/add-meal/?product={product.id}")
+            return redirect(redirect_url)
     else:
         form = ProductForm()
 

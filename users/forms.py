@@ -211,3 +211,8 @@ class ProductForm(forms.ModelForm):
                 "placeholder": "Углеводы на 100 г",
             }),
         }
+
+    def clean_name(self):
+        """Приводит пользовательское название продукта к единому виду."""
+        name = self.cleaned_data["name"]
+        return " ".join(name.split())
